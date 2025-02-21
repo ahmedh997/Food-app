@@ -1,0 +1,51 @@
+:root{
+  --main-color: #4AA35A;
+  --second-color: #3A3A3D;
+  --third-color: #494949;
+  --fourth-color: #F7F7F7;
+}
+
+.auth-container {
+  background-image: url(../src/assets/images/bg-image.jpeg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+}
+
+.bg-overlay {
+  background: linear-gradient(45deg, rgba(47, 140, 96, 0.6), rgba(0, 0, 0, 0.8));
+}
+
+form .input-group, form .form-control, form .input-group-text {
+  background-color: #F7F7F7;
+  border: none;
+  border-radius: 8px;
+}
+
+
+.title h3{
+  color: #494949;
+}
+
+.links .text-register{
+  color: #3A3A3D;
+}
+.links .text-forget{
+  color: var(--main-color);
+}
+
+form .btn-success{
+  background-color: var(--main-color) !important;
+}
+
+.icon::after {
+  content: "";
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 1px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
