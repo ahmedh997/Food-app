@@ -27,9 +27,9 @@ export default function Categories() {
 
   const deleteCategoryId = async (id) => {
     try {
-      let remove = await axiosClient.delete(CATEGORIES_URLS.deleteCategory(id), { headers: { Authorization: localStorage.getItem('token') } });
+      let remove = await axiosClient.delete(CATEGORIES_URLS.deleteCategory(id = id), { headers: { Authorization: localStorage.getItem('token') } });
       console.log(remove);
-      setCategoriesList(remove?.data)
+      getCategoriesList()
 
     }
     catch (error) {
@@ -95,9 +95,9 @@ export default function Categories() {
                           <FiEdit aria-label='Edit' className="me-2 text-success" /> Edit
                         </a>
                       </li>
-                      <li>
+                      <li onClick={() => deleteCategoryId(category.id)}>
                         <a role="button" className="dropdown-item d-flex align-items-center text-danger">
-                          <FiTrash2 onClick={deleteCategoryId(category.id)} aria-label='Trash' className="me-2 text-danger" /> Delete
+                          <FiTrash2  aria-label='Trash' className="me-2 text-danger" /> Delete
                         </a>
                       </li>
                     </ul>

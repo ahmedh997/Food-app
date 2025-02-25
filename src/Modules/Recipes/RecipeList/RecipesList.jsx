@@ -12,7 +12,7 @@ export default function RecipesList() {
   const getRecipesList = async (size, number) => {
     try {
       let list = await axiosClient.get(RECIPES_URLS.getRecipe(size = '10', number = '1'), { headers: { Authorization: localStorage.getItem('token') } });
-      console.log(list.data);
+      console.log(list?.data);
       setRecipesList(list?.data?.data);
 
     }
@@ -27,7 +27,7 @@ export default function RecipesList() {
     try {
       let remove = await axiosClient.delete(RECIPES_URLS.deleteRecipe(id), { headers: { Authorization: localStorage.getItem('token') } });
       console.log(remove);
-      setRecipesList(remove?.data);
+      getRecipesList();
 
     }
     catch (error) {
@@ -62,7 +62,9 @@ export default function RecipesList() {
             <tr className='text-center'>
               <th scope="col">#</th>
               <th scope="col">Name</th>
-              <th scope="col">Creation date</th>
+              <th scope="col">Image</th>
+              <th scope="col">Price</th>
+              <th scope="col">Description</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -71,7 +73,9 @@ export default function RecipesList() {
               <tr key={recipe.id} className='text-center'>
                 <th scope="row">{recipe.id}</th>
                 <td>{recipe.name}</td>
-                <td>{recipe.creationDate}</td>
+                <td>{recipe.imagePath ? <img width={100} src={`https://upskilling-egypt.com:3006/${recipe.imagePath}`} alt="Recipe Image" />: <span>No Image!</span>}</td>
+                <td>{recipe.price}</td>
+                <td>{recipe.description}</td>
                 <td>
                   <div className="dropdown">
                     <button
@@ -93,9 +97,9 @@ export default function RecipesList() {
                           <FiEdit aria-label='Edit' className="me-2 text-success" /> Edit
                         </a>
                       </li>
-                      <li>
+                      <li onClick={() => deleteRecipeId(recipe.id)}>
                         <a role="button" className="dropdown-item d-flex align-items-center text-danger">
-                          <FiTrash2 onClick={deleteRecipeId(recipe.id)} aria-label='Trash' className="me-2 text-danger" /> Delete
+                          <FiTrash2 aria-label='Trash' className="me-2 text-danger" /> Delete
                         </a>
                       </li>
                     </ul>
