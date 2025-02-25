@@ -14,7 +14,7 @@
 }
 
 .bg-overlay {
-  background: linear-gradient(45deg, rgba(47, 140, 96, 0.6), rgba(0, 0, 0, 0.8));
+  background: linear-gradient(45deg, rgba(47, 140, 96, 0.6), rgba(0, 0, 0, 0.6));
 }
 
 form .input-group, form .form-control, form .input-group-text {
@@ -48,4 +48,41 @@ form .btn-success{
   height: 60%;
   width: 1px;
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-container{
+  min-height: 100dvh;
+}
+
+.sidebar-container .sidebar-logo{
+  padding: 20px 3px 0;
+  margin-bottom: 3rem;
+}
+
+.sidebar-container .sidebar-logo a:hover{
+  background-color: transparent !important;
+  border: none;
+}
+
+.sidebar-container .log-out-btn{
+  margin-top: 3rem;
+}
+
+.sidebar-container .ps-sidebar-container{
+  background-color: rgba(31, 38, 62, 1) !important;
+  min-height: 100dvh;
+  border-top-right-radius: 2rem;
+}
+
+.sidebar-container .ps-menu-button:hover{
+  background-color: rgba(0, 146, 77, 0.1) !important;
+  border-left: rgba(0, 146, 71, 1) solid 3px;
+}
+
+.sidebar-container .ps-sidebar-root{
+  border: none;
+}
+
+.header-container{
+  background-color: rgba(0, 146, 71, 1);
 }

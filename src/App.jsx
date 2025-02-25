@@ -1,7 +1,5 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react';
+import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AuthLayout from './Modules/Shared/AuthLayout/AuthLayout';
 import Notfound from './Modules/Shared/Notfound/Notfound';
@@ -17,8 +15,41 @@ import CategoriesData from './Modules/Categories/CategoriesData/CategoriesData';
 import RecipesList from './Modules/Recipes/RecipeList/RecipesList';
 import RecipeData from './Modules/Recipes/RecipeData/RecipeData';
 import UsersList from './Modules/Users/UsersList';
+import { jwtDecode } from 'jwt-decode';
+import ProtectedRoute from './Modules/Shared/ProtectedRoute/ProtectedRoute';
+import ChangePassword from './Modules/Authentecation/ChangePassword/ChangePassword';
 
 function App() {
+
+  const [loginData, setloginData] = useState(null);
+
+  const saveLoginData = () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const decodedData = jwtDecode(token);
+        setloginData(decodedData);
+
+      } else {
+        setloginData(null);
+      }
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      setLoginData(null);
+      localStorage.removeItem('token');
+    }
+  };
+
+  useEffect(() => {
+    
+    if (localStorage.getItem('token')) {
+      saveLoginData();
+    }
+
+  }, []);
+
+
+
 
 
   const router = createBrowserRouter([
@@ -28,12 +59,12 @@ function App() {
       element: <AuthLayout />,
       errorElement: <Notfound />,
       children: [
-        { index: true, element: <Login /> },
-        { path: 'login', element: <Login /> },
-        { path: 'register', element: <Register /> },
-        { path: 'forget-password', element: <ForgetPassword /> },
-        { path: 'reset-password', element: <ResetPassword /> },
-        { path: 'Verify-account', element: <VerifyAccount /> },
+        { index: true, element: <Login saveLoginData={saveLoginData} /> },
+        { path: '/login', element: <Login saveLoginData={saveLoginData} /> },
+        { path: '/register', element: <Register /> },
+        { path: '/forget-password', element: <ForgetPassword /> },
+        { path: '/reset-password', element: <ResetPassword /> },
+        { path: '/Verify-account', element: <VerifyAccount /> },
 
 
 
@@ -41,15 +72,17 @@ function App() {
     },
     {
       path: '/dashboard',
-      element: <MasterLayout />,
+      element: <ProtectedRoute><MasterLayout loginData={loginData} /></ProtectedRoute>,
       errorElement: <Notfound />,
       children: [
         { index: true, element: <Dashboard /> },
+        { path: 'dashboard', element: <Dashboard /> },
         { path: 'recipes', element: <RecipesList /> },
         { path: 'recipe-data', element: <RecipeData /> },
         { path: 'categories', element: <Categories /> },
         { path: 'category', element: <CategoriesData /> },
-        { path: 'user', element: <UsersList /> },
+        { path: 'users', element: <UsersList /> },
+        { path: 'change-password', element: <ChangePassword /> },
 
 
 
@@ -59,10 +92,10 @@ function App() {
   ]);
 
   return <>
-  
+
     <RouterProvider router={router} />
-  
-  </>
+
+  </>;
 }
 
-export default App
+export default App;
