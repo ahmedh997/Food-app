@@ -73,7 +73,7 @@ export default function RecipesList() {
               <tr key={recipe.id} className='text-center'>
                 <th scope="row">{recipe.id}</th>
                 <td>{recipe.name}</td>
-                <td>{recipe.imagePath ? <img width={100} src={`https://upskilling-egypt.com:3006/${recipe.imagePath}`} alt="Recipe Image" />: <span>No Image!</span>}</td>
+                <td>{recipe.imagePath ? <img width={25} src={`https://upskilling-egypt.com:3006/${recipe.imagePath}`} alt="Recipe Image" />: <span>No Image!</span>}</td>
                 <td>{recipe.price}</td>
                 <td>{recipe.description}</td>
                 <td>
