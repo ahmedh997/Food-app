@@ -25,6 +25,21 @@ export default function Categories() {
 
   };
 
+  const deleteCategoryId = async (id) => {
+    try {
+      let remove = await axiosClient.delete(CATEGORIES_URLS.deleteCategory(id), { headers: { Authorization: localStorage.getItem('token') } });
+      console.log(remove);
+      setCategoriesList(remove?.data)
+
+    }
+    catch (error) {
+      console.log(error);
+
+    }
+  };
+
+
+
   useEffect(() => {
     getCategoriesList();
   }, []);
@@ -42,18 +57,19 @@ export default function Categories() {
       </div>
     </div>
     <div className="recipe-container m-3 rounded-4">
-      <table className="table table-striped">
-        <thead>
-          <tr className='text-center'>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Creation date</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            categoriesList?.length > 0 ? categoriesList?.map((category) => <>
+      {categoriesList?.length > 0 ?
+
+        <table className="table table-striped">
+          <thead>
+            <tr className='text-center'>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Creation date</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categoriesList?.map((category) => <>
               <tr key={category.id} className='text-center'>
                 <th scope="row">{category.id}</th>
                 <td>{category.name}</td>
@@ -81,20 +97,18 @@ export default function Categories() {
                       </li>
                       <li>
                         <a role="button" className="dropdown-item d-flex align-items-center text-danger">
-                          <FiTrash2 aria-label='Trash' className="me-2 text-danger" /> Delete
+                          <FiTrash2 onClick={deleteCategoryId(category.id)} aria-label='Trash' className="me-2 text-danger" /> Delete
                         </a>
                       </li>
                     </ul>
                   </div>
                 </td>
               </tr>
-            </>) : <NoData />
-          }
+            </>)
+            }
 
-        </tbody>
-      </table>
-
-
+          </tbody>
+        </table> : <NoData />}
     </div>
 
   </>;

@@ -26,7 +26,7 @@ export default function SideBar() {
   return <>
 
 
-    <div className="sidebar-container">
+    <div className="sidebar-container h-100">
 
       <Sidebar collapsed={isCollapsed}>
         <Menu>
