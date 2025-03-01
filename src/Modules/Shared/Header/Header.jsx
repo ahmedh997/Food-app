@@ -3,7 +3,7 @@ import React from 'react';
 export default function Header({ title, description, imageBanner }) {
   return <>
 
-    <div className="header-container rounded-4 p-4 m-3 text-white">
+    <div className="header-container rounded-4 p-2 m-3 text-white">
       <div className="container-fluid">
         <div className="d-flex align-items-center justify-content-between ">
           <div className="caption">

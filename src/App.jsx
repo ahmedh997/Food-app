@@ -82,10 +82,6 @@ function App() {
         { path: 'categories', element: <Categories /> },
         { path: 'category', element: <CategoriesData /> },
         { path: 'users', element: <UsersList /> },
-        { path: 'change-password', element: <ChangePassword /> },
-
-
-
       ]
     }
 

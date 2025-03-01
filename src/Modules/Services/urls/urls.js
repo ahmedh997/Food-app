@@ -15,6 +15,7 @@ export const USER_URLS = {
     forger_pass: `/users/Reset/Request`,
     reset_pass: `/users/Reset`,
     get_user: (id) => `/users/${id}`,
+    change_pass: `Users/ChangePassword`
 };
 
 export const CATEGORIES_URLS = {

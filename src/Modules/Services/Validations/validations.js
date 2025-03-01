@@ -15,3 +15,11 @@ export const passwordValidation = {
         message: 'Password must include at least one lowercase letter, one uppercase letter, one digit, and one special character'
     }
 };
+
+export const confirmPasswordValidation = (password) => {
+    return {
+        required: 'Confirm Password is required',
+        validate: (value) =>
+            value === password || 'Passwords do not match',
+    };
+};

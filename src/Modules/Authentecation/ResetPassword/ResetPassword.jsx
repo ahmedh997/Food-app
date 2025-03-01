@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { axiosClient, USER_URLS } from '../../Services/urls/urls';
-import { emailValidation, passwordValidation } from '../../Services/Validations/validations';
+import { confirmPasswordValidation, emailValidation, passwordValidation } from '../../Services/Validations/validations';
 
 
 
@@ -139,10 +139,7 @@ export default function ResetPassword() {
         </span>
 
 
-        <input {...register('confirmPassword', {
-          required: 'Confirm New Password is required', validate: (value) =>
-            value === password || "The passwords do not match",
-        })} type={ShowConfirmPassword ? "text" : "password"} className="form-control" placeholder="Confirm New Password" aria-label="Password" aria-describedby="basic-addon1" />
+        <input {...register('confirmPassword', confirmPasswordValidation(password))} type={ShowConfirmPassword ? "text" : "password"} className="form-control" placeholder="Confirm New Password" aria-label="Password" aria-describedby="basic-addon1" />
         <span className="eye-icon show-pass p-3" onClick={toggleConfirmPasswordVisibility} style={{ cursor: 'pointer' }}>
           {ShowConfirmPassword ? (
             <svg width={20} height={20} viewBox="0 0 24 24" fill="none">

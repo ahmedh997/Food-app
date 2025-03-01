@@ -44,7 +44,7 @@ export default function RecipesList() {
 
   return <>
 
-    <Header title={<h3 className='fw-bolder'>Recipes <span className='fw-lighter'>Items</span> </h3>} description={'You can now add your items that any user can order it from the Application and you can edit'} imageBanner={<img src={bannerImg} width={200}></img>} />
+    <Header title={<h3 className='fw-bolder'>Recipes <span className='fw-lighter'>Items</span> </h3>} description={'You can now add your items that any user can order it from the Application and you can edit'} imageBanner={<img className='bannerImage' src={bannerImg} width={200}></img>} />
     <div className="table-headers d-flex align-items-center justify-content-between m-4 rounded-4">
       <div className="text ">
         <h4>Recipes Table Details</h4>
@@ -57,23 +57,23 @@ export default function RecipesList() {
     <div className="recipe-container m-3 rounded-4">
       {recipesList?.length > 0 ?
 
-        <table className="table table-striped">
-          <thead>
-            <tr className='text-center'>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Image</th>
-              <th scope="col">Price</th>
-              <th scope="col">Description</th>
-              <th scope="col">Actions</th>
+        <table className="table table-striped table-borderless table-light">
+          <thead className="rounded-4">
+            <tr className="text-center bg-light">
+              <th className="p-4" scope="col">#</th>
+              <th className="p-4" scope="col">Item Name</th>
+              <th className="p-4" scope="col">Image</th>
+              <th className="p-4" scope="col">Price</th>
+              <th className="p-4" scope="col">Description</th>
+              <th className="p-4" scope="col">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='table-striped'>
             {recipesList?.map((recipe) => <>
               <tr key={recipe.id} className='text-center'>
                 <th scope="row">{recipe.id}</th>
                 <td>{recipe.name}</td>
-                <td>{recipe.imagePath ? <img width={25} src={`https://upskilling-egypt.com:3006/${recipe.imagePath}`} alt="Recipe Image" />: <span>No Image!</span>}</td>
+                <td>{recipe.imagePath ? <img width={50} src={`https://upskilling-egypt.com:3006/${recipe.imagePath}`} alt="Recipe Image" /> : <span>No Image!</span>}</td>
                 <td>{recipe.price}</td>
                 <td>{recipe.description}</td>
                 <td>

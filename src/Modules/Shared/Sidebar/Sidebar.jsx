@@ -4,6 +4,7 @@ import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import logo from '../../../assets/images/logo-sidebar.png';
 import { FiHome, FiUsers, FiGrid, FiCalendar, FiLock, FiLogOut } from "react-icons/fi";
 import { toast } from 'react-toastify';
+import ChangePassword from '../../Authentecation/ChangePassword/ChangePassword';
 
 export default function SideBar() {
 
@@ -26,7 +27,7 @@ export default function SideBar() {
   return <>
 
 
-    <div className="sidebar-container h-100">
+    <div className="sidebar-container">
 
       <Sidebar collapsed={isCollapsed}>
         <Menu>
@@ -36,13 +37,31 @@ export default function SideBar() {
           <MenuItem className='text-white' icon={<FiUsers className="text-white text-2xl" />} component={<Link to='/dashboard/users' />}> Users </MenuItem>
           <MenuItem className='text-white' icon={<FiGrid className="text-white text-2xl" />} component={<Link to='/dashboard/recipes' />}>Recipes  </MenuItem>
           <MenuItem className='text-white' icon={<FiCalendar className="text-white text-2xl" />} component={<Link to='/dashboard/categories' />}> Categories </MenuItem>
-          <MenuItem className='text-white' icon={<FiLock className="text-white text-2xl" />} component={<Link to='/dashboard/change-password' />}> Change Password </MenuItem>
+          <MenuItem
+            className='text-white'
+            icon={<FiLock className="text-white text-2xl" />}
+            onClick={() => document.getElementById("openChangePassword").click()}
+          >
+            Change Password
+          </MenuItem>
           <MenuItem className='text-white log-out-btn' onClick={logOut} icon={<FiLogOut className="text-white text-2xl" />}> Logout </MenuItem>
         </Menu>
       </Sidebar>
 
     </div>
 
+    {/* Hidden button to trigger modal */}
+    <button
+      id="openChangePassword"
+      type="button"
+      className="d-none"
+      data-bs-toggle="modal"
+      data-bs-target="#changePasswordModal"
+    >
+    </button>
+
+    {/* Include Change Password Modal */}
+    <ChangePassword />
 
 
 

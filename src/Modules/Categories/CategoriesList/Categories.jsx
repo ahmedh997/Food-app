@@ -29,7 +29,7 @@ export default function Categories() {
     try {
       let remove = await axiosClient.delete(CATEGORIES_URLS.deleteCategory(id = id), { headers: { Authorization: localStorage.getItem('token') } });
       console.log(remove);
-      getCategoriesList()
+      getCategoriesList();
 
     }
     catch (error) {
@@ -56,14 +56,15 @@ export default function Categories() {
         <button className='btn btn-success px-4 py-2'>Add new Category</button>
       </div>
     </div>
+
     <div className="recipe-container m-3 rounded-4">
       {categoriesList?.length > 0 ?
 
-        <table className="table table-striped">
+        <table className="table table-striped table-borderless">
           <thead>
-            <tr className='text-center'>
+            <tr className='text-center t-head'>
               <th scope="col">#</th>
-              <th scope="col">Name</th>
+              <th scope="col">Item Name</th>
               <th scope="col">Creation date</th>
               <th scope="col">Actions</th>
             </tr>
@@ -97,7 +98,7 @@ export default function Categories() {
                       </li>
                       <li onClick={() => deleteCategoryId(category.id)}>
                         <a role="button" className="dropdown-item d-flex align-items-center text-danger">
-                          <FiTrash2  aria-label='Trash' className="me-2 text-danger" /> Delete
+                          <FiTrash2 aria-label='Trash' className="me-2 text-danger" /> Delete
                         </a>
                       </li>
                     </ul>

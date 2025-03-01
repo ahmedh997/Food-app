@@ -41,12 +41,12 @@ export default function Navbar({ loginData }) {
               
               <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item">
                     Profile
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item">
                     Settings
                   </a>
                 </li>
@@ -54,14 +54,14 @@ export default function Navbar({ loginData }) {
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item">
                     Logout
                   </a>
                 </li>
               </ul>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a className="nav-link">
                 <FaBell aria-label='Notification bell' className="text-muted" size={20} />
               </a>
             </li>
