@@ -6,6 +6,8 @@ import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiEye, FiEdit, FiTrash2 } from "react-icons/fi";
 import NoData from '../../Shared/NoData/NoData';
 import ConfirmDelete from '../../Shared/ConfirmDelete/ConfirmDelete';
+import AddNewCategory from './AddNewCategory';
+import { toast } from 'react-toastify';
 
 export default function Categories() {
 
@@ -33,12 +35,28 @@ export default function Categories() {
       let remove = await axiosClient.delete(CATEGORIES_URLS.deleteCategory(selectedCategoryId), { headers: { Authorization: localStorage.getItem('token') } });
       console.log(remove);
       getCategoriesList();
+      toast.success('Category deleted successfully');
       document.getElementById("closeConfirmDelete").click();
 
     }
     catch (error) {
       console.log(error);
+      toast.error(error.response.data.message);
+    }
+  };
 
+
+  const addNewCategory = async (data) => {
+    try {
+      let addNew = await axiosClient.post(CATEGORIES_URLS.addCategory, data, { headers: { Authorization: localStorage.getItem('token') } });
+      console.log(addNew);
+      getCategoriesList();
+      toast.success('Category added successfully');
+      document.getElementById("closeAddCategory").click();
+    }
+    catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -56,7 +74,8 @@ export default function Categories() {
         <p>You can check all details</p>
       </div>
       <div className="button-add ">
-        <button className='btn btn-success px-4 py-2'>Add new Category</button>
+        <button data-bs-toggle="modal"
+          data-bs-target="#addNewCategory" className='btn btn-success px-4 py-2'>Add new Category</button>
       </div>
     </div>
 
@@ -118,7 +137,6 @@ export default function Categories() {
 
 
     <button
-      id="openConfirmDelete"
       type="button"
       className="d-none"
       data-bs-toggle="modal"
@@ -128,6 +146,18 @@ export default function Categories() {
     </button>
 
     <ConfirmDelete deleteAction={deleteCategoryId} />
+
+
+    <button
+      type="button"
+      className="d-none"
+      data-bs-toggle="modal"
+      data-bs-target="#addNewCategory"
+    >
+
+    </button>
+
+    <AddNewCategory addNewCategory={addNewCategory} />
 
   </>;
 }

@@ -20,8 +20,9 @@ export const USER_URLS = {
 
 export const CATEGORIES_URLS = {
     getCategories: (size, number) => `/Category/?pageSize=${size}&pageNumber=${number}`,
-    deleteCategory: (id) => `/Category/${id}`
-
+    deleteCategory: (id) => `/Category/${id}`,
+    addCategory: `/Category`,
+    updateCategory: (id) => `/Category/${id}`
 };
 
 export const RECIPES_URLS = {
