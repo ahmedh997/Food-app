@@ -97,12 +97,12 @@ export default function Login({ saveLoginData }) {
 
       {/* links  */}
       <div className="links d-flex justify-content-between my-4">
-        <Link className='text-register text-decoration-none fw-bold' to='/register'>Register Now?</Link>
-        <Link className='text-forget text-decoration-none fw-bold' to='/forget-password'>Foregt Password?</Link>
+        <Link className='text-register text-decoration-none fw-medium' to='/register'>Register Now?</Link>
+        <Link className='text-forget text-decoration-none fw-medium' to='/forget-password'>Foregt Password?</Link>
       </div>
 
 
-      <button disabled={isSubmitting} className='btn btn-success w-100 mb-3 fs-5 fw-bold py-2'>{isSubmitting?  <i className='fas fa-spinner fa-spin'></i>  :  'Login' }</button>
+      <button disabled={isSubmitting} className='btn btn-success w-100 mb-3 fs-5 fw-medium py-2'>{isSubmitting?  <i className='fas fa-spinner fa-spin'></i>  :  'Login' }</button>
       
 
 

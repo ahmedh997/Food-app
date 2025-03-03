@@ -1,3 +1,6 @@
+/* ========================== */
+/* Root Variables & Colors */
+/* ========================== */
 :root {
   --main-color: #4AA35A;
   --second-color: #3A3A3D;
@@ -6,35 +9,12 @@
   --darker-green: rgba(0, 146, 71, 1);
 }
 
+/* ========================== */
+/* Global Typography & Colors */
+/* ========================== */
 .text-success {
   color: var(--darker-green) !important;
 }
-
-.btn-success{
-  background-color: var(--darker-green) !important;
-}
-
-
-.auth-container {
-  background-image: url(../src/assets/images/bg-image.jpeg);
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-
-}
-
-.bg-overlay {
-  background: linear-gradient(45deg, rgba(47, 140, 96, 0.6), rgba(0, 0, 0, 0.6));
-}
-
-form .input-group,
-form .form-control,
-form .input-group-text {
-  background-color: #F7F7F7;
-  border: none;
-  border-radius: 8px;
-}
-
 
 .title h3 {
   color: #494949;
@@ -48,25 +28,55 @@ form .input-group-text {
   color: var(--main-color);
 }
 
+/* ========================== */
+/* Buttons */
+/* ========================== */
+.btn-success {
+  background-color: var(--darker-green) !important;
+}
+
 form .btn-success {
   background-color: var(--main-color) !important;
 }
 
-.icon::after {
-  content: "";
-  position: absolute;
-  left: 50px;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 60%;
-  width: 1px;
-  background-color: rgba(0, 0, 0, 0.2);
+/* ========================== */
+/* Forms & Inputs */
+/* ========================== */
+form .input-group,
+form .form-control,
+form .input-group-text {
+  background-color: #F7F7F7;
+  border: none;
+  border-radius: 8px;
 }
 
+/* ========================== */
+/* Authentication Page */
+/* ========================== */
+.auth-container {
+  background-image: url(../src/assets/images/bg-image.jpeg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.bg-overlay {
+  background: linear-gradient(45deg, rgba(47, 140, 96, 0.6), rgba(0, 0, 0, 0.6));
+}
+
+/* ========================== */
+/* Sidebar Styles */
+/* ========================== */
 .sidebar-icons {
   background-color: rgba(31, 38, 62, 1) !important;
   min-height: 100dvh;
-  border-top-right-radius: 2rem;
+  border-top-right-radius: 2.5rem;
+}
+
+.sidebar-container .ps-sidebar-container {
+  background-color: rgba(31, 38, 62, 1) !important;
+  min-height: 100dvh;
+  border-top-right-radius: 2.5rem;
 }
 
 .sidebar-container .sidebar-logo {
@@ -83,12 +93,6 @@ form .btn-success {
   margin-top: 3rem;
 }
 
-.sidebar-container .ps-sidebar-container {
-  background-color: rgba(31, 38, 62, 1) !important;
-  min-height: 100dvh;
-  border-top-right-radius: 2rem;
-}
-
 .sidebar-container .ps-menu-button:hover {
   background-color: rgba(0, 146, 77, 0.1) !important;
   border-left: rgba(0, 146, 71, 1) solid 3px;
@@ -98,27 +102,53 @@ form .btn-success {
   border: none;
 }
 
+/* ========================== */
+/* Header */
+/* ========================== */
 .header-container {
   background-color: rgba(0, 146, 71, 1);
   background-image: url(../src/assets/images/bg-circls.jpg);
   background-blend-mode: screen;
 }
 
+/* ========================== */
+/* Icons */
+/* ========================== */
+.icon::after {
+  content: "";
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 1px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* ========================== */
+/* Tables */
+/* ========================== */
 .table {
   vertical-align: middle !important;
 }
 
+/* ========================== */
+/* 404 Not Found Page */
+/* ========================== */
 .bg-notFound {
-  background-image: url(../src/assets/images/404-Notfound.jpg);
+  background-image: url(../src/assets/images/404-Notfound2.png);
   background-position: right;
   background-size: contain;
   background-repeat: no-repeat;
   width: 100vw;
   height: 100vh;
-  background-color: black;
-  background-blend-mode: screen;
+  background-color: white;
+  background-blend-mode: multiply  ;
 }
 
-.modal-header{
+/* ========================== */
+/* Modals */
+/* ========================== */
+.modal-header {
   border-bottom: none !important;
 }

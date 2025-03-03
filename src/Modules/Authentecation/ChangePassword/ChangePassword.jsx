@@ -38,7 +38,7 @@ export default function ChangePassword() {
     }
   };
   return (
-    <div className="modal fade px-5 py-3 rounded-4" id="changePasswordModal" tabIndex="-1" aria-hidden="true" >
+    <div className="modal fade px-5 py-3" id="changePasswordModal" tabIndex="-1" aria-hidden="true" >
       <div className="modal-dialog">
         <div className="modal-content p-3">
           <div className="modal-header d-flex flex-column justify-content-center align-items-center">
@@ -83,7 +83,7 @@ export default function ChangePassword() {
                   )}
                 </span>
               </div>
-              {errors.password && <span className='text-danger'>{errors.password.message}</span>}
+              {errors.oldPassword && <span className='text-danger'>{errors.oldPassword.message}</span>}
               {/* new password  */}
               <div className="input-group mb-2 mt-4 d-flex align-items-center justify-content-between">
                 <span className="input-group-text p-3" id="basic-addon1">
@@ -147,7 +147,7 @@ export default function ChangePassword() {
               </div>
               {errors.confirmNewPassword && <span className='text-danger'>{errors.confirmNewPassword.message}</span>}
 
-              <button disabled={isSubmitting} className='btn btn-success w-100 mt-3 fs-5 fw-bold py-2'>{isSubmitting ? <i className='fas fa-spinner fa-spin'></i> : 'Change Password'}</button>
+              <button disabled={isSubmitting} className='btn btn-success w-100 mt-3 fs-5 fw-medium py-2'>{isSubmitting ? <i className='fas fa-spinner fa-spin'></i> : 'Change Password'}</button>
             </form>
           </div>
         </div>

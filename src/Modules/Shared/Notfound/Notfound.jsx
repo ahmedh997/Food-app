@@ -6,7 +6,7 @@ export default function Notfound() {
   return (
     <div className=" h-auto vh-100">
       <div className='bg-notFound'>
-        <div className='text-white p-5'>
+        <div className='text-black p-5'>
           <div className="image">
             <img className='w-25 p-2 my-5' src={logo} alt="Food App Logo" />
           </div>

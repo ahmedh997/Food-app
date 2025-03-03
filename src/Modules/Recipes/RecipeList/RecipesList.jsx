@@ -5,9 +5,11 @@ import { axiosClient, RECIPES_URLS } from '../../Services/urls/urls';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiEye, FiEdit, FiTrash2 } from "react-icons/fi";
 import NoData from '../../Shared/NoData/NoData';
+import ConfirmDelete from '../../Shared/ConfirmDelete/ConfirmDelete';
 
 export default function RecipesList() {
   const [recipesList, setRecipesList] = useState([]);
+  const [selectedRecipeId, setSelectedRecipeId] = useState(null);
 
   const getRecipesList = async (size, number) => {
     try {
@@ -23,19 +25,18 @@ export default function RecipesList() {
 
   };
 
-  const deleteRecipeId = async (id) => {
+  const deleteRecipeId = async () => {
     try {
-      let remove = await axiosClient.delete(RECIPES_URLS.deleteRecipe(id), { headers: { Authorization: localStorage.getItem('token') } });
+      let remove = await axiosClient.delete(RECIPES_URLS.deleteRecipe(selectedRecipeId), { headers: { Authorization: localStorage.getItem('token') } });
       console.log(remove);
       getRecipesList();
-
+      document.getElementById("closeConfirmDelete").click();
     }
     catch (error) {
       console.log(error);
 
     }
   };
-
 
 
   useEffect(() => {
@@ -97,7 +98,8 @@ export default function RecipesList() {
                           <FiEdit aria-label='Edit' className="me-2 text-success" /> Edit
                         </a>
                       </li>
-                      <li onClick={() => deleteRecipeId(recipe.id)}>
+                      <li onClick={() => setSelectedRecipeId(recipe.id)} data-bs-toggle="modal"
+                        data-bs-target="#confirmDeleteModal">
                         <a role="button" className="dropdown-item d-flex align-items-center text-danger">
                           <FiTrash2 aria-label='Trash' className="me-2 text-danger" /> Delete
                         </a>
@@ -112,6 +114,20 @@ export default function RecipesList() {
           </tbody>
         </table> : <NoData />}
     </div>
+
+
+    <button
+      id="openConfirmDelete"
+      type="button"
+      className="d-none"
+      data-bs-toggle="modal"
+      data-bs-target="#confirmDeleteModal"
+    >
+
+    </button>
+
+    <ConfirmDelete deleteAction={deleteRecipeId} />
+
 
   </>;
 

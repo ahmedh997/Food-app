@@ -7,7 +7,7 @@ export default function Header({ title, description, imageBanner }) {
       <div className="container-fluid">
         <div className="d-flex align-items-center justify-content-between ">
           <div className="caption">
-            <h3>{title}</h3>
+            <div className='h3'>{title}</div>
             <p>{description}</p>
           </div>
           <div className="image-section">

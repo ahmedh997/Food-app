@@ -52,7 +52,7 @@ export default function ForgetPassword() {
         <input {...register('email', emailValidation)} type="text" className="form-control" placeholder="Enter your E-mail" aria-label="Email" aria-describedby="basic-addon1" />
       </div>
       {errors.email && <span className='text-danger'>{errors.email.message}</span>}
-      <button disabled={isSubmitting} className='btn btn-success w-100 mb-3 fs-5 fw-bold py-2 my-5'>{isSubmitting ? <i className='fas fa-spinner fa-spin'></i> : 'Submit'}</button>
+      <button disabled={isSubmitting} className='btn btn-success w-100 mb-3 fs-5 fw-medium py-2 my-5'>{isSubmitting ? <i className='fas fa-spinner fa-spin'></i> : 'Submit'}</button>
       
 
 

@@ -5,11 +5,13 @@ import { axiosClient, CATEGORIES_URLS } from '../../Services/urls/urls';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiEye, FiEdit, FiTrash2 } from "react-icons/fi";
 import NoData from '../../Shared/NoData/NoData';
+import ConfirmDelete from '../../Shared/ConfirmDelete/ConfirmDelete';
 
 export default function Categories() {
 
 
   const [categoriesList, setCategoriesList] = useState([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
   const getCategoriesList = async (size, number) => {
     try {
@@ -25,11 +27,13 @@ export default function Categories() {
 
   };
 
-  const deleteCategoryId = async (id) => {
+
+  const deleteCategoryId = async () => {
     try {
-      let remove = await axiosClient.delete(CATEGORIES_URLS.deleteCategory(id = id), { headers: { Authorization: localStorage.getItem('token') } });
+      let remove = await axiosClient.delete(CATEGORIES_URLS.deleteCategory(selectedCategoryId), { headers: { Authorization: localStorage.getItem('token') } });
       console.log(remove);
       getCategoriesList();
+      document.getElementById("closeConfirmDelete").click();
 
     }
     catch (error) {
@@ -37,7 +41,6 @@ export default function Categories() {
 
     }
   };
-
 
 
   useEffect(() => {
@@ -96,7 +99,8 @@ export default function Categories() {
                           <FiEdit aria-label='Edit' className="me-2 text-success" /> Edit
                         </a>
                       </li>
-                      <li onClick={() => deleteCategoryId(category.id)}>
+                      <li onClick={() => setSelectedCategoryId(category.id)} data-bs-toggle="modal"
+                        data-bs-target="#confirmDeleteModal">
                         <a role="button" className="dropdown-item d-flex align-items-center text-danger">
                           <FiTrash2 aria-label='Trash' className="me-2 text-danger" /> Delete
                         </a>
@@ -111,6 +115,19 @@ export default function Categories() {
           </tbody>
         </table> : <NoData />}
     </div>
+
+
+    <button
+      id="openConfirmDelete"
+      type="button"
+      className="d-none"
+      data-bs-toggle="modal"
+      data-bs-target="#confirmDeleteModal"
+    >
+
+    </button>
+
+    <ConfirmDelete deleteAction={deleteCategoryId} />
 
   </>;
 }

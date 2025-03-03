@@ -50,7 +50,6 @@ export default function SideBar() {
 
     </div>
 
-    {/* Hidden button to trigger modal */}
     <button
       id="openChangePassword"
       type="button"
@@ -60,7 +59,7 @@ export default function SideBar() {
     >
     </button>
 
-    {/* Include Change Password Modal */}
+
     <ChangePassword />
 
 

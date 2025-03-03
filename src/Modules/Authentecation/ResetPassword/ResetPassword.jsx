@@ -161,7 +161,7 @@ export default function ResetPassword() {
 
 
 
-      <button disabled={isSubmitting} className='btn btn-success w-100 mb-3 fs-5 fw-bold py-2 my-4'>{isSubmitting ? <i className='fas fa-spinner fa-spin'></i> : 'Reset Password'}</button>
+      <button disabled={isSubmitting} className='btn btn-success w-100 mb-3 fs-5 fw-medium py-2 my-4'>{isSubmitting ? <i className='fas fa-spinner fa-spin'></i> : 'Reset Password'}</button>
 
 
 
