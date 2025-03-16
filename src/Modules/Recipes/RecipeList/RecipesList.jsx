@@ -69,6 +69,7 @@ export default function RecipesList() {
       </div>
     </div>
     <div className="recipe-container m-3 rounded-4">
+
       {loading ? <>
         <div className='d-flex align-items-center justify-content-center'>
 

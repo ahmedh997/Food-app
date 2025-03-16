@@ -9,7 +9,7 @@ export default function Pagination({ getList, arrayOfPages }) {
         if (currentNumber < arrayOfPages.length) {
             // const nextPage = currentNumber + 1;
             setCurrentNumber(currentNumber +1 );
-            getList(3, currentNumber + 1 );
+            getList(5, currentNumber + 1 );
         }
     };
     // Handle Previous Number
@@ -17,7 +17,7 @@ export default function Pagination({ getList, arrayOfPages }) {
         if (currentNumber > 1) {
             // const nextPage = currentNumber - 1;
             setCurrentNumber(currentNumber - 1 );
-            getList(3, currentNumber - 1 );
+            getList(5, currentNumber - 1 );
         }
     };
 
