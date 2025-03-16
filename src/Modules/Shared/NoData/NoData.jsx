@@ -1,5 +1,5 @@
 import React from 'react'
-import notFoundImg from '../../../assets/images/Not-found-delete.png'
+import noDataImg from '../../../assets/images/Not-found-delete.png'
 
 export default function NoData() {
   return <>
@@ -7,7 +7,7 @@ export default function NoData() {
     <div className="container  d-flex justify-content-center align-items-center">
           <div className="text-center">
             <div className="img-notfound my-3">
-                <img width={300} src={notFoundImg} alt="No Data" />
+                <img width={300} src={noDataImg} alt="No Data" />
             </div>
             <div>
                 <h4>No data to show!</h4>

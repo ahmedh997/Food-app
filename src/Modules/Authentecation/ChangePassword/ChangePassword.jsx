@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import { axiosClient, USER_URLS } from '../../Services/urls/urls';
 import { confirmPasswordValidation, passwordValidation } from '../../Services/Validations/validations';
 import logo from '../../../assets/images/Auth-logo.png';
+import { privateApiInstance } from '../../Services/api/apiInstance';
+import { USERS_ENDPOINTS } from '../../Services/api/apiConfig';
 
 
 export default function ChangePassword() {
@@ -27,14 +29,14 @@ export default function ChangePassword() {
     
     try{
 
-      let change = await axiosClient.put(USER_URLS.change_pass, data, { headers: { Authorization: localStorage.getItem('token') } });
-      console.log(change.data.message);
-      toast.success(change.data.message);
-
+      let change = await privateApiInstance.put(USERS_ENDPOINTS.CHANGE_PASSWORD, data, { headers: { Authorization: localStorage.getItem('token') } });
+      console.log(change?.data?.message);
+      toast.success(change?.data?.message);
+      document.getElementById("closeChangeModal").click();
     }
-    catch (error){
+    catch (error){ 
       console.log(error);
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
     }
   };
   return (
@@ -42,7 +44,7 @@ export default function ChangePassword() {
       <div className="modal-dialog">
         <div className="modal-content p-3">
           <div className="modal-header d-flex flex-column justify-content-center align-items-center">
-            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button id='closeChangeModal' type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <div className="logo-container text-center">
               <img className='w-50 m-3' src={logo} alt="Logo Food App" />
             </div>

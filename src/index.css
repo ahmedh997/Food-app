@@ -97,6 +97,10 @@ form .input-group-text {
   background-color: rgba(0, 146, 77, 0.1) !important;
   border-left: rgba(0, 146, 71, 1) solid 3px;
 }
+.sidebar-container .active {
+  background-color: rgba(0, 146, 77, 0.1) !important;
+  border-left: rgba(0, 146, 71, 1) solid 3px;
+}
 
 .sidebar-container .ps-sidebar-root {
   border: none;

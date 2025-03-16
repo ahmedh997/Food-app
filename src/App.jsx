@@ -21,7 +21,10 @@ import ChangePassword from './Modules/Authentecation/ChangePassword/ChangePasswo
 
 function App() {
 
-  const [loginData, setloginData] = useState(null);
+  const [loginData, setloginData] = useState(() => {
+    let token = localStorage.getItem('token');
+    return token ? jwtDecode(token) : null;
+  });
 
   const saveLoginData = () => {
     try {
@@ -41,7 +44,7 @@ function App() {
   };
 
   useEffect(() => {
-    
+
     if (localStorage.getItem('token')) {
       saveLoginData();
     }

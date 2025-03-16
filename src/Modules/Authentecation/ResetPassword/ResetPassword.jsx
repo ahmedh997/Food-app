@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { axiosClient, USER_URLS } from '../../Services/urls/urls';
 import { confirmPasswordValidation, emailValidation, passwordValidation } from '../../Services/Validations/validations';
+import { USERS_ENDPOINTS } from '../../Services/api/apiConfig';
+import { apiInstance } from '../../Services/api/apiInstance';
 
 
 
@@ -36,7 +38,7 @@ export default function ResetPassword() {
 
 
     try {
-      let res = await axiosClient.post(USER_URLS.reset_pass, data);
+      let res = await apiInstance.post(USERS_ENDPOINTS.RESET, data);
 
       console.log(res?.response?.data?.message);
 

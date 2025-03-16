@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { axiosClient, USER_URLS } from '../../Services/urls/urls';
 import { emailValidation, passwordValidation } from '../../Services/Validations/validations';
+import { apiInstance } from '../../Services/api/apiInstance';
+import { USERS_ENDPOINTS } from '../../Services/api/apiConfig';
 
 
 
@@ -24,7 +25,7 @@ export default function Login({ saveLoginData }) {
   const onSubmit = async (data) => {
 
     try {
-      let res = await axiosClient.post(USER_URLS.login, data);
+      let res = await apiInstance.post(USERS_ENDPOINTS.LOGIN, data);
       
       localStorage.setItem('token', res?.data?.token);
       saveLoginData();

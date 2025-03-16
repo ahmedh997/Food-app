@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import { axiosClient, USER_URLS } from '../../Services/urls/urls';
 import { emailValidation } from '../../Services/Validations/validations';
+import { apiInstance } from '../../Services/api/apiInstance';
+import { USERS_ENDPOINTS } from '../../Services/api/apiConfig';
 
 
 
@@ -19,7 +21,7 @@ export default function ForgetPassword() {
 
     try {
 
-      let res = await axiosClient.post(USER_URLS.forger_pass, data);
+      let res = await apiInstance.post(USERS_ENDPOINTS.FORGET_REQUEST, data);
       
       
       toast.success("Your request is being processed, please check your email");
