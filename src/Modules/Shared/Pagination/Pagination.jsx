@@ -1,43 +1,76 @@
 import React, { useState } from 'react';
 
-export default function Pagination({ getList, arrayOfPages }) {
-
+export default function Pagination({ getList, arrayOfPages, itemsPerPage = 5 }) {
     const [currentNumber, setCurrentNumber] = useState(1);
 
-    // Handle Next Number
     const handleNext = () => {
         if (currentNumber < arrayOfPages.length) {
-            // const nextPage = currentNumber + 1;
-            setCurrentNumber(currentNumber +1 );
-            getList(5, currentNumber + 1 );
+            const nextPage = currentNumber + 1;
+            setCurrentNumber(nextPage);
+            getList(itemsPerPage, nextPage);
         }
     };
-    // Handle Previous Number
+
     const handlePrev = () => {
         if (currentNumber > 1) {
-            // const nextPage = currentNumber - 1;
-            setCurrentNumber(currentNumber - 1 );
-            getList(5, currentNumber - 1 );
+            const prevPage = currentNumber - 1;
+            setCurrentNumber(prevPage);
+            getList(itemsPerPage, prevPage);
         }
     };
 
-    return <>
+    const handlePageClick = (page) => {
+        if (page !== currentNumber) {
+            setCurrentNumber(page);
+            getList(itemsPerPage, page);
+        }
+    };
 
-        <nav aria-label="Page navigation" className='m-4'>
+
+    if (!arrayOfPages?.length) {
+        return null;
+    }
+
+    return (
+        <nav aria-label="Page navigation" className="m-3">
             <ul className="pagination">
-                <li className="page-item">
-                    <a className={`page-link ${currentNumber === 1 ? 'disabled' : ''}`} role='button' aria-label="Previous" onClick={handlePrev}>
-                        <span aria-hidden="true">«</span>
-                    </a>
+                <li className={`page-item ${currentNumber === 1 ? 'disabled' : ''}`}>
+                    <button
+                        className="page-link"
+                        onClick={handlePrev}
+                        disabled={currentNumber === 1}
+                        aria-label="Previous"
+                    >
+                        <span aria-hidden="true">&laquo;</span>
+                    </button>
                 </li>
-                {arrayOfPages?.map((page) => <li role='button' onClick={() => { getList(5, page); setCurrentNumber(page); }} key={page} className={`page-item ${currentNumber === page ? 'active' : ''}`}><a className={"page-link"}>{page}</a></li>)}
-                <li className="page-item">
-                    <a className={`page-link ${currentNumber === arrayOfPages.length ? 'disabled' : ''}`} role='button' aria-label="Next" onClick={handleNext}>
-                        <span aria-hidden="true">»</span>
-                    </a>
+
+                {arrayOfPages.map((page) => (
+                    <li
+                        key={page}
+                        className={`page-item ${currentNumber === page ? 'active' : ''}`}
+                    >
+                        <button
+                            className="page-link"
+                            onClick={() => handlePageClick(page)}
+                            aria-current={currentNumber === page ? 'page' : undefined}
+                        >
+                            {page}
+                        </button>
+                    </li>
+                ))}
+
+                <li className={`page-item ${currentNumber === arrayOfPages.length ? 'disabled' : ''}`}>
+                    <button
+                        className="page-link"
+                        onClick={handleNext}
+                        disabled={currentNumber === arrayOfPages.length}
+                        aria-label="Next"
+                    >
+                        <span aria-hidden="true">&raquo;</span>
+                    </button>
                 </li>
             </ul>
         </nav>
-
-    </>;
+    );
 };

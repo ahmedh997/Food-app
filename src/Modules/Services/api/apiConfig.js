@@ -30,6 +30,10 @@ export const RECIPES_ENDPOINTS = {
     ADD_RECIPE: `/Recipe`,
 };
 
+export const TAGS_ENDPOINT = {
+    GET_TAGS: `/tag/`
+}
+
 
 export const FAVORITES_ENDPOINTS = {
     GET_FAVORITES: `/userRecipe`,

@@ -10,6 +10,7 @@ import { IMAGE_URL, USERS_ENDPOINTS } from '../Services/api/apiConfig';
 import { privateApiInstance } from '../Services/api/apiInstance';
 import noDataImg from '../../assets/images/blank-user-img.webp';
 import Pagination from '../Shared/Pagination/Pagination';
+import Filtration from '../Shared/Filteration/Filtration';
 
 
 export default function UsersList() {
@@ -22,8 +23,8 @@ export default function UsersList() {
 
   const getUsersList = async (pageSize, pageNumber) => {
     try {
-      let users = await privateApiInstance.get(USERS_ENDPOINTS.GET_USERS,{
-        params:{
+      let users = await privateApiInstance.get(USERS_ENDPOINTS.GET_USERS, {
+        params: {
           pageSize,
           pageNumber,
         }
@@ -31,7 +32,7 @@ export default function UsersList() {
       console.log(users?.data?.data);
       setUsersList(users?.data?.data);
       setLoading(false);
-      setArrayOfPages(Array(users?.data?.totalNumberOfPages).fill().map((_, index) => index +1));
+      setArrayOfPages(Array(users?.data?.totalNumberOfPages).fill().map((_, index) => index + 1));
     }
     catch (error) {
       console.log(error);
@@ -71,7 +72,7 @@ export default function UsersList() {
         <p>You can check all details</p>
       </div>
     </div>
-
+    <Filtration />
     <div className="category-container m-3">
       {loading ? <>
         <div className='d-flex align-items-center justify-content-center'>
@@ -98,7 +99,7 @@ export default function UsersList() {
               {usersList?.map((users) => <>
                 <tr key={users?.id} className='text-center'>
                   <td data-label="User Name">{users?.userName}</td>
-                  <td data-label="User Image" ><img style={{ maxWidth: 70, height: 70, objectFit: 'cover' }} loading='lazy' className='img-fluid rounded-circle' src={users?.imagePath ? `${IMAGE_URL}/${users?.imagePath}` : `${noDataImg}`} alt="Recipe Image" /></td>
+                  <td data-label="User Image" ><img style={{ width: 70, height: 70, objectFit: 'cover' }} loading='lazy' className='img-fluid rounded-circle' src={users?.imagePath ? `${IMAGE_URL}/${users?.imagePath}` : `${noDataImg}`} alt="Recipe Image" /></td>
                   <td data-label="User Email">{users?.email}</td>
                   <td data-label="User Phone">{users?.phoneNumber}</td>
                   <td data-label="User Country">{users?.country}</td>
@@ -148,7 +149,7 @@ export default function UsersList() {
     <ConfirmDelete deleteAction={deleteUserById} />
 
 
-  <Pagination getList={getUsersList} arrayOfPages={arrayOfPages} />
+    <Pagination getList={getUsersList} arrayOfPages={arrayOfPages} />
 
   </>;
 }

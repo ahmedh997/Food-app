@@ -11,21 +11,28 @@ import { privateApiInstance } from '../../Services/api/apiInstance';
 import { CATEGORIES_ENDPOINTS } from '../../Services/api/apiConfig';
 import UpdateCategory from './UpdateCategory';
 import Pagination from '../../Shared/Pagination/Pagination';
+import Filtration from '../../Shared/Filteration/Filtration';
 
 export default function Categories() {
 
 
   const [categoriesList, setCategoriesList] = useState([]);
+
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+
   const [loading, setLoading] = useState(true);
+
   const [arrayOfPages, setArrayOfPages] = useState([]);
 
-  const getCategoriesList = async (pageSize, pageNumber) => {
+
+  // get Categories List
+  const getCategoriesList = async (pageSize, pageNumber, name) => {
     try {
       let list = await privateApiInstance.get(CATEGORIES_ENDPOINTS.GET_CATEGORIES(),{
         params: {
         pageSize: pageSize,
         pageNumber: pageNumber,
+        name: name
       }});
       console.log(list?.data);
       setCategoriesList(list?.data?.data);
@@ -39,7 +46,7 @@ export default function Categories() {
 
   };
 
-
+  // delete Category Id
   const deleteCategoryId = async () => {
     try {
       let remove = await privateApiInstance.delete(CATEGORIES_ENDPOINTS.DELETE_CATEGORY(selectedCategoryId));
@@ -55,7 +62,7 @@ export default function Categories() {
     }
   };
 
-
+  // add New Category
   const addNewCategory = async (data) => {
     try {
       let addNew = await privateApiInstance.post(CATEGORIES_ENDPOINTS.ADD_CATEGORY, data);
@@ -70,6 +77,7 @@ export default function Categories() {
     }
   };
 
+  // edit Category 
   const editCategory = async (data) => {
     try {
 
@@ -104,6 +112,8 @@ export default function Categories() {
           data-bs-target="#addNewCategory" className='btn btn-success px-4 py-2'>Add new Category</button>
       </div>
     </div>
+
+    <Filtration getCategoriesList={getCategoriesList}  />
 
     <div className="category-container m-3">
       {loading ? <>
