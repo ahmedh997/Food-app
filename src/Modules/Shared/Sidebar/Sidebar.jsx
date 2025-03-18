@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { use, useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import logo from '../../../assets/images/logo-sidebar.png';
 import { FiHome, FiUsers, FiGrid, FiCalendar, FiLock, FiLogOut } from "react-icons/fi";
@@ -9,8 +9,10 @@ import ChangePassword from '../../Authentecation/ChangePassword/ChangePassword';
 export default function SideBar() {
 
 
+  const location = useLocation();
+
   const navigate = useNavigate();
-  const [isCollapsed, setIsCollapced] = useState(true);
+  const [isCollapsed, setIsCollapced] = useState(localStorage.getItem('sidebarCollapsed') === 'true');
   const [active, setActive] = useState('');
 
 
@@ -20,6 +22,7 @@ export default function SideBar() {
 
   let toggleSidebar = () => {
     setIsCollapced(!isCollapsed);
+    localStorage.setItem('sidebarCollapsed', !isCollapsed);
   };
 
 
@@ -28,6 +31,19 @@ export default function SideBar() {
     toast.info('Logged out successfully');
     navigate('/login');
   };
+
+  useEffect(() => {
+    const path = location.pathname;
+    let title = 'Food App';
+
+    if (path.includes('/dashboard')) title = "Dashboard | Food App";
+    if (path.includes('/recipes')) title = "Recipes | Food App";
+    if (path.includes('/categories')) title = "Categories | Food App";
+    if (path.includes('/users')) title = "Users | Food App";
+
+    document.title = title;
+  }, [location.pathname]);
+
 
 
   return <>

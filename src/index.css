@@ -156,3 +156,12 @@ form .input-group-text {
 .modal-header {
   border-bottom: none !important;
 }
+
+
+nav ul.pagination{
+  --bs-pagination-active-bg:var(--main-color);
+  --bs-pagination-active-border-color:var(--main-color);
+  --bs-pagination-color:var(--main-color);
+  --bs-pagination-hover-color:var(--main-color);
+  --bs-pagination-hover-bg:var(--main-color);
+}

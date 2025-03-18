@@ -21,12 +21,15 @@ export default function UsersList() {
   const [loading, setLoading] = useState(true);
   const [arrayOfPages, setArrayOfPages] = useState([]);
 
-  const getUsersList = async (pageSize, pageNumber) => {
+  const getUsersList = async (pageSize, pageNumber, name, email, country) => {
     try {
       let users = await privateApiInstance.get(USERS_ENDPOINTS.GET_USERS, {
         params: {
           pageSize,
           pageNumber,
+          userName: name,
+          email,
+          country,
         }
       });
       console.log(users?.data?.data);
@@ -72,7 +75,9 @@ export default function UsersList() {
         <p>You can check all details</p>
       </div>
     </div>
-    <Filtration />
+
+    <Filtration getUsersList={getUsersList} />
+
     <div className="category-container m-3">
       {loading ? <>
         <div className='d-flex align-items-center justify-content-center'>

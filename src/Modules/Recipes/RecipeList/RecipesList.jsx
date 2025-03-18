@@ -160,11 +160,11 @@ export default function RecipesList() {
                             <FiEye aria-label='Eye' className="me-2 text-success" /> View
                           </a>
                         </li>
-                        <li>
+                        <Link className='text-decoration-none' to={`/dashboard/recipes/${recipe?.id}`}>
                           <a role="button" className="dropdown-item d-flex align-items-center">
                             <FiEdit aria-label='Edit' className="me-2 text-success" /> Edit
                           </a>
-                        </li>
+                        </Link>
                         <li onClick={() => setSelectedRecipeId(recipe?.id)} data-bs-toggle="modal"
                           data-bs-target="#confirmDeleteModal">
                           <a role="button" className="dropdown-item d-flex align-items-center text-danger">

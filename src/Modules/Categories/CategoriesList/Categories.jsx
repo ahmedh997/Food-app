@@ -5,18 +5,22 @@ import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiEye, FiEdit, FiTrash2 } from "react-icons/fi";
 import NoData from '../../Shared/NoData/NoData';
 import ConfirmDelete from '../../Shared/ConfirmDelete/ConfirmDelete';
-import AddNewCategory from './AddNewCategory';
 import { toast } from 'react-toastify';
 import { privateApiInstance } from '../../Services/api/apiInstance';
 import { CATEGORIES_ENDPOINTS } from '../../Services/api/apiConfig';
-import UpdateCategory from './UpdateCategory';
 import Pagination from '../../Shared/Pagination/Pagination';
 import Filtration from '../../Shared/Filteration/Filtration';
+import CategoriesData from '../CategoriesData/CategoriesData';
 
 export default function Categories() {
 
 
+  
   const [categoriesList, setCategoriesList] = useState([]);
+  
+  
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
 
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
@@ -25,15 +29,18 @@ export default function Categories() {
   const [arrayOfPages, setArrayOfPages] = useState([]);
 
 
+
+
   // get Categories List
   const getCategoriesList = async (pageSize, pageNumber, name) => {
     try {
-      let list = await privateApiInstance.get(CATEGORIES_ENDPOINTS.GET_CATEGORIES(),{
+      let list = await privateApiInstance.get(CATEGORIES_ENDPOINTS.GET_CATEGORIES(), {
         params: {
-        pageSize: pageSize,
-        pageNumber: pageNumber,
-        name: name
-      }});
+          pageSize: pageSize,
+          pageNumber: pageNumber,
+          name: name
+        }
+      });
       console.log(list?.data);
       setCategoriesList(list?.data?.data);
       setLoading(false);
@@ -80,7 +87,6 @@ export default function Categories() {
   // edit Category 
   const editCategory = async (data) => {
     try {
-
       let updateCategory = await privateApiInstance.put(CATEGORIES_ENDPOINTS.UPDATE_CATEGORY(selectedCategoryId), data);
       console.log(updateCategory);
       getCategoriesList();
@@ -113,7 +119,9 @@ export default function Categories() {
       </div>
     </div>
 
-    <Filtration getCategoriesList={getCategoriesList}  />
+
+
+    <Filtration getCategoriesList={getCategoriesList} />
 
     <div className="category-container m-3">
       {loading ? <>
@@ -160,7 +168,7 @@ export default function Categories() {
                           <FiEdit aria-label='Edit' className="me-2 text-success" /> Edit
                         </a>
                       </li>
-                      <li onClick={() => setSelectedCategoryId(category?.id)} data-bs-toggle="modal"
+                      <li onClick={() => {setSelectedCategoryId(category?.id); setSelectedCategory(category)}} data-bs-toggle="modal"
                         data-bs-target="#confirmDeleteModal">
                         <a role="button" className="dropdown-item d-flex align-items-center text-danger">
                           <FiTrash2 aria-label='Trash' className="me-2 text-danger" /> Delete
@@ -199,7 +207,7 @@ export default function Categories() {
 
     </button>
 
-    <AddNewCategory addNewCategory={addNewCategory} />
+
 
     <button
       type="button"
@@ -210,9 +218,10 @@ export default function Categories() {
 
     </button>
 
-    <UpdateCategory editCategory={editCategory} />
+    <CategoriesData addNewCategory={addNewCategory} editCategory={editCategory} selectedCategory={selectedCategory} />
 
-    <Pagination getList={getCategoriesList} arrayOfPages={arrayOfPages} />       
+
+    <Pagination getList={getCategoriesList} arrayOfPages={arrayOfPages} />
 
   </>;
 }
