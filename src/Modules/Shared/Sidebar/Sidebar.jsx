@@ -13,7 +13,7 @@ export default function SideBar() {
 
   const navigate = useNavigate();
   const [isCollapsed, setIsCollapced] = useState(localStorage.getItem('sidebarCollapsed') === 'true');
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState(localStorage.getItem('isActiveMenu') || '');
 
 
   const handleMenuItemClick = (menuItem) => {
@@ -43,6 +43,19 @@ export default function SideBar() {
 
     document.title = title;
   }, [location.pathname]);
+
+  useEffect(() => {
+    let activeItem = '';
+
+    if (location.pathname.includes('/dashboard')) activeItem = 'home';
+    if (location.pathname.includes('/categories')) activeItem = 'categories';
+    if (location.pathname.includes('/recipes')) activeItem = 'recipes';
+    if (location.pathname.includes('/users')) activeItem = 'users';
+
+    setActive(activeItem)
+    localStorage.setItem('isActiveMenu', activeItem);
+  }, [location.pathname]);
+
 
 
 

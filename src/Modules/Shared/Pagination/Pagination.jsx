@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 export default function Pagination({ getList, arrayOfPages, itemsPerPage = 5 }) {
     const [currentNumber, setCurrentNumber] = useState(1);
+    const maxVisiblePages = 5; 
 
     const handleNext = () => {
         if (currentNumber < arrayOfPages.length) {
@@ -26,6 +27,18 @@ export default function Pagination({ getList, arrayOfPages, itemsPerPage = 5 }) 
         }
     };
 
+    const getVisiblePages = () => {
+        const totalPages = arrayOfPages.length;
+        const half = Math.floor(maxVisiblePages / 2);
+        let start = Math.max(currentNumber - half, 1);
+        let end = Math.min(start + maxVisiblePages - 1, totalPages);
+
+        if (end - start + 1 < maxVisiblePages) {
+            start = Math.max(end - maxVisiblePages + 1, 1);
+        }
+
+        return arrayOfPages.slice(start - 1, end);
+    };
 
     if (!arrayOfPages?.length) {
         return null;
@@ -45,7 +58,7 @@ export default function Pagination({ getList, arrayOfPages, itemsPerPage = 5 }) 
                     </button>
                 </li>
 
-                {arrayOfPages.map((page) => (
+                {getVisiblePages().map((page) => (
                     <li
                         key={page}
                         className={`page-item ${currentNumber === page ? 'active' : ''}`}
@@ -60,6 +73,14 @@ export default function Pagination({ getList, arrayOfPages, itemsPerPage = 5 }) 
                     </li>
                 ))}
 
+                {arrayOfPages.length > maxVisiblePages && currentNumber < arrayOfPages.length - 2 && (
+                    <li className="page-item disabled">
+                        <button className="page-link" disabled>
+                            ...
+                        </button>
+                    </li>
+                )}
+
                 <li className={`page-item ${currentNumber === arrayOfPages.length ? 'disabled' : ''}`}>
                     <button
                         className="page-link"
@@ -73,4 +94,4 @@ export default function Pagination({ getList, arrayOfPages, itemsPerPage = 5 }) 
             </ul>
         </nav>
     );
-};
+}
