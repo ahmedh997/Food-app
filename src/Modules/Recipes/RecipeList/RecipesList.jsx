@@ -53,7 +53,7 @@ export default function RecipesList() {
   };
 
   // get Recipes List
-  const getRecipesList = async (pageSize, pageNumber, name , tag, category) => {
+  const getRecipesList = async (pageSize, pageNumber, name, tag, category) => {
     try {
       let list = await privateApiInstance.get(RECIPES_ENDPOINTS.GET_RECIPES(), {
         params: {

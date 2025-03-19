@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-export default function CategoriesData({ selectedCategory, addNewCategory, editCategory }) {
+export default function CategoriesData({ addNewCategory, editCategory }) {
 
   let { register, formState: { errors, isSubmitting }, handleSubmit, setValue } = useForm();
 

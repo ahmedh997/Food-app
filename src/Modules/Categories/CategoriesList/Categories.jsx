@@ -14,10 +14,10 @@ import CategoriesData from '../CategoriesData/CategoriesData';
 export default function Categories() {
 
 
-  
+
   const [categoriesList, setCategoriesList] = useState([]);
-  
-  
+
+
   const [selectedCategory, setSelectedCategory] = useState(null);
 
 
@@ -167,7 +167,7 @@ export default function Categories() {
                           <FiEdit aria-label='Edit' className="me-2 text-success" /> Edit
                         </a>
                       </li>
-                      <li onClick={() => {setSelectedCategoryId(category?.id); setSelectedCategory(category)}} data-bs-toggle="modal"
+                      <li onClick={() => { setSelectedCategoryId(category?.id); setSelectedCategory(category); }} data-bs-toggle="modal"
                         data-bs-target="#confirmDeleteModal">
                         <a role="button" className="dropdown-item d-flex align-items-center text-danger">
                           <FiTrash2 aria-label='Trash' className="me-2 text-danger" /> Delete
@@ -185,6 +185,9 @@ export default function Categories() {
     </div>
 
 
+    {/* hidden buttons for modals */}
+
+
     <button
       type="button"
       className="d-none"
@@ -194,7 +197,6 @@ export default function Categories() {
 
     </button>
 
-    <ConfirmDelete deleteAction={deleteCategoryId} item={'Item'} />
 
 
     <button
@@ -217,8 +219,10 @@ export default function Categories() {
 
     </button>
 
-    <CategoriesData addNewCategory={addNewCategory} editCategory={editCategory} selectedCategory={selectedCategory} />
 
+    <ConfirmDelete deleteAction={deleteCategoryId} item={'Item'} />
+
+    <CategoriesData addNewCategory={addNewCategory} editCategory={editCategory} selectedCategory={selectedCategory} />
 
     <Pagination getList={getCategoriesList} arrayOfPages={arrayOfPages} />
 

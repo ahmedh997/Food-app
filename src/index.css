@@ -16,6 +16,10 @@
   color: var(--darker-green) !important;
 }
 
+.bg-addnew{
+  background-color: rgba(240, 255, 239, 1) !important;
+}
+
 .title h3 {
   color: #494949;
 }
@@ -157,7 +161,9 @@ form .input-group-text {
   border-bottom: none !important;
 }
 
-
+/* ========================== */
+/* Pagination */
+/* ========================== */
 nav ul.pagination{
   --bs-pagination-active-bg:var(--main-color);
   --bs-pagination-active-border-color:var(--main-color);

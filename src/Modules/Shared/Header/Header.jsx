@@ -8,7 +8,7 @@ export default function Header({ page, Items, userName }) {
   const location = useLocation();
   const bannerBG = location.pathname === '/dashboard' ? banner : bannerImg;
   const bannerWidth = location.pathname === '/dashboard'  ? 300 : 150;
-  const imageBanner = <img src={bannerBG} width={bannerWidth}></img>;
+  const imageBanner = <img src={bannerBG} loading='lazy' width={bannerWidth}></img>;
   const title = location.pathname === '/dashboard' ? <h3 className='fw-bolder'>Welcome  <span className='fw-lighter'>{userName}</span> </h3> : <h3 className='fw-bolder'>{page} <span className='fw-lighter'>{Items}</span> </h3>;
   const description = location.pathname === '/dashboard' ? 'This is a welcoming screen for the entry of the application , you can now see the options' : 'You can now add your items that any user can order it from the Application and you can edit';
 
