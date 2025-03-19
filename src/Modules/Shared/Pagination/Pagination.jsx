@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 export default function Pagination({ getList, arrayOfPages, itemsPerPage = 5 }) {
     const [currentNumber, setCurrentNumber] = useState(1);
-    const maxVisiblePages = 5; 
 
     const handleNext = () => {
         if (currentNumber < arrayOfPages.length) {
@@ -27,19 +26,6 @@ export default function Pagination({ getList, arrayOfPages, itemsPerPage = 5 }) 
         }
     };
 
-    const getVisiblePages = () => {
-        const totalPages = arrayOfPages.length;
-        const half = Math.floor(maxVisiblePages / 2);
-        let start = Math.max(currentNumber - half, 1);
-        let end = Math.min(start + maxVisiblePages - 1, totalPages);
-
-        if (end - start + 1 < maxVisiblePages) {
-            start = Math.max(end - maxVisiblePages + 1, 1);
-        }
-
-        return arrayOfPages.slice(start - 1, end);
-    };
-
     if (!arrayOfPages?.length) {
         return null;
     }
@@ -58,25 +44,65 @@ export default function Pagination({ getList, arrayOfPages, itemsPerPage = 5 }) 
                     </button>
                 </li>
 
-                {getVisiblePages().map((page) => (
-                    <li
-                        key={page}
-                        className={`page-item ${currentNumber === page ? 'active' : ''}`}
+                
+                <li className={`page-item ${currentNumber === 1 ? 'active' : ''}`}>
+                    <button
+                        className="page-link"
+                        onClick={() => handlePageClick(1)}
+                        aria-current={currentNumber === 1 ? 'page' : undefined}
                     >
-                        <button
-                            className="page-link"
-                            onClick={() => handlePageClick(page)}
-                            aria-current={currentNumber === page ? 'page' : undefined}
-                        >
-                            {page}
-                        </button>
-                    </li>
-                ))}
+                        1
+                    </button>
+                </li>
 
-                {arrayOfPages.length > maxVisiblePages && currentNumber < arrayOfPages.length - 2 && (
+                
+                {currentNumber > 3 && (
                     <li className="page-item disabled">
                         <button className="page-link" disabled>
                             ...
+                        </button>
+                    </li>
+                )}
+
+                
+                {arrayOfPages.map((page) => {
+                    if (page > 1 && page < arrayOfPages.length && Math.abs(page - currentNumber) <= 1) {
+                        return (
+                            <li
+                                key={page}
+                                className={`page-item ${currentNumber === page ? 'active' : ''}`}
+                            >
+                                <button
+                                    className="page-link"
+                                    onClick={() => handlePageClick(page)}
+                                    aria-current={currentNumber === page ? 'page' : undefined}
+                                >
+                                    {page}
+                                </button>
+                            </li>
+                        );
+                    }
+                    return null;
+                })}
+
+                
+                {currentNumber < arrayOfPages.length - 2 && (
+                    <li className="page-item disabled">
+                        <button className="page-link" disabled>
+                            ...
+                        </button>
+                    </li>
+                )}
+
+                
+                {arrayOfPages.length > 1 && (
+                    <li className={`page-item ${currentNumber === arrayOfPages.length ? 'active' : ''}`}>
+                        <button
+                            className="page-link"
+                            onClick={() => handlePageClick(arrayOfPages.length)}
+                            aria-current={currentNumber === arrayOfPages.length ? 'page' : undefined}
+                        >
+                            {arrayOfPages.length}
                         </button>
                     </li>
                 )}
