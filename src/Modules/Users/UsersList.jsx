@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import bannerImg from '../../assets/images/image-banner-all.png';
 import Header from '../Shared/Header/Header';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiEye, FiTrash2 } from "react-icons/fi";
@@ -68,7 +67,7 @@ export default function UsersList() {
 
   return <>
 
-    <Header title={<h3 className='fw-bolder'>Users <span className='fw-lighter'>List</span> </h3>} description={'You can now show any user can order it from the Application and you can edit'} imageBanner={<img src={bannerImg} width={150}></img>} />
+    <Header page={"Users"} Items={"List"} />
     <div className="table-headers d-flex align-items-center justify-content-between m-4 rounded-4">
       <div className="text ">
         <h4>Users Table Data</h4>
@@ -151,7 +150,7 @@ export default function UsersList() {
 
     </button>
 
-    <ConfirmDelete deleteAction={deleteUserById} />
+    <ConfirmDelete deleteAction={deleteUserById} item={'User'} />
 
 
     <Pagination getList={getUsersList} arrayOfPages={arrayOfPages} />

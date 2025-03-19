@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import bannerImg from '../../../assets/images/image-banner-all.png';
 import Header from '../../Shared/Header/Header';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { FiEye, FiEdit, FiTrash2 } from "react-icons/fi";
@@ -107,7 +106,7 @@ export default function Categories() {
 
   return <>
 
-    <Header title={<h3 className='fw-bolder'>Categories <span className='fw-lighter'>Items</span> </h3>} description={'You can now add your items that any user can order it from the Application and you can edit'} imageBanner={<img src={bannerImg} width={150}></img>} />
+    <Header page={"Categories"} Items={"Items"} />
     <div className="table-headers d-flex align-items-center justify-content-between m-4 rounded-4">
       <div className="text ">
         <h4>Categories Table Details</h4>
@@ -195,7 +194,7 @@ export default function Categories() {
 
     </button>
 
-    <ConfirmDelete deleteAction={deleteCategoryId} />
+    <ConfirmDelete deleteAction={deleteCategoryId} item={'Item'} />
 
 
     <button

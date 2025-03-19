@@ -2,7 +2,7 @@ import React from 'react';
 import notFoundImg from '../../../assets/images/Not-found-delete.png';
 
 
-export default function ConfirmDelete({ deleteAction }) {
+export default function ConfirmDelete({ deleteAction, item }) {
 
 
     return <>
@@ -20,14 +20,14 @@ export default function ConfirmDelete({ deleteAction }) {
                                     <img width={300} src={notFoundImg} alt="Confirm Delete" />
                                 </div>
                                 <div>
-                                    <h4>Delete This Item ?</h4>
-                                    <p className='text-muted'>are you sure you want to delete this item ? if you are sure just click on delete it</p>
+                                    <h4>Delete This {item}?</h4>
+                                    <p className='text-muted'>are you sure you want to delete this {item} ? if you are sure just click on delete it</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-outline-danger" onClick={deleteAction}>Delete This Item</button>
+                        <button type="button" className="btn btn-outline-danger" onClick={deleteAction}>Delete This {item}</button>
                     </div>
                 </div>
             </div>

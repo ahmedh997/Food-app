@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import bannerImg from '../../../assets/images/image-banner-all.png';
 import Header from '../../Shared/Header/Header';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import noDataImg from '../../../assets/images/no-img.jpeg';
@@ -100,7 +99,7 @@ export default function RecipesList() {
 
   return <>
 
-    <Header title={<h3 className='fw-bolder'>Recipes <span className='fw-lighter'>Items</span> </h3>} description={'You can now add your items that any user can order it from the Application and you can edit'} imageBanner={<img className='bannerImage' src={bannerImg} width={150}></img>} />
+    <Header page={"Recipes"} Items={"Items"} />
     <div className="table-headers d-flex align-items-center justify-content-between m-4 rounded-4">
       <div className="text ">
         <h4>Recipes Table Details</h4>
@@ -193,7 +192,7 @@ export default function RecipesList() {
 
     </button>
 
-    <ConfirmDelete deleteAction={deleteRecipeId} />
+    <ConfirmDelete deleteAction={deleteRecipeId} item={'Item'} />
 
 
     <Pagination getList={getRecipesList} arrayOfPages={arrayOfPages} />

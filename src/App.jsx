@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { createBrowserRouter, createHashRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import AuthLayout from './Modules/Shared/AuthLayout/AuthLayout';
 import Notfound from './Modules/Shared/Notfound/Notfound';
 import Login from './Modules/Authentecation/login/Login';
@@ -17,7 +17,6 @@ import RecipeData from './Modules/Recipes/RecipeData/RecipeData';
 import UsersList from './Modules/Users/UsersList';
 import { jwtDecode } from 'jwt-decode';
 import ProtectedRoute from './Modules/Shared/ProtectedRoute/ProtectedRoute';
-import ChangePassword from './Modules/Authentecation/ChangePassword/ChangePassword';
 
 function App() {
 
@@ -78,8 +77,8 @@ function App() {
       element: <ProtectedRoute><MasterLayout loginData={loginData} /></ProtectedRoute>,
       errorElement: <Notfound />,
       children: [
-        { index: true, element: <Dashboard /> },
-        { path: 'dashboard', element: <Dashboard /> },
+        { index: true, element: <Dashboard loginData={loginData} /> },
+        { path: 'dashboard', element: <Dashboard loginData={loginData} /> },
         { path: 'recipes', element: <RecipesList /> },
         { path: 'recipes/new-recipe', element: <RecipeData /> },
         { path: 'recipes/:recipeID', element: <RecipeData /> },
