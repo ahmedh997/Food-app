@@ -162,7 +162,7 @@ export default function Categories() {
                           <FiEye aria-label='Eye' className="me-2 text-success" /> View
                         </a>
                       </li>
-                      <li data-bs-toggle="modal" data-bs-target="#editCategory" onClick={() => setSelectedCategoryId(category?.id)}>
+                      <li data-bs-toggle="modal" data-bs-target="#editCategory" onClick={() => {setSelectedCategoryId(category?.id);setSelectedCategory(category)}}>
                         <a role="button" className="dropdown-item d-flex align-items-center" >
                           <FiEdit aria-label='Edit' className="me-2 text-success" /> Edit
                         </a>
@@ -222,7 +222,7 @@ export default function Categories() {
 
     <ConfirmDelete deleteAction={deleteCategoryId} item={'Item'} />
 
-    <CategoriesData addNewCategory={addNewCategory} editCategory={editCategory} selectedCategory={selectedCategory} />
+    <CategoriesData addNewCategory={addNewCategory} editCategory={editCategory} categoryToEdit={selectedCategory} />
 
     <Pagination getList={getCategoriesList} arrayOfPages={arrayOfPages} />
 

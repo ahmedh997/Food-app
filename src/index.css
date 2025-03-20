@@ -20,6 +20,11 @@
   background-color: rgba(240, 255, 239, 1) !important;
 }
 
+.bg-add-img{
+  background-color: rgba(240, 255, 239, 1) !important;
+  border: var(--main-color) dashed 2px;
+}
+
 .title h3 {
   color: #494949;
 }
@@ -170,4 +175,12 @@ nav ul.pagination{
   --bs-pagination-color:var(--main-color);
   --bs-pagination-hover-color:var(--main-color);
   --bs-pagination-hover-bg:var(--main-color);
+}
+
+/* ========================== */
+/* Recipe Image Input */
+/* ========================== */
+
+.file-input{
+  display: none;
 }

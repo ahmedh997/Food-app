@@ -81,7 +81,7 @@ function App() {
         { path: 'dashboard', element: <Dashboard loginData={loginData} /> },
         { path: 'recipes', element: <RecipesList /> },
         { path: 'recipes/new-recipe', element: <RecipeData /> },
-        { path: 'recipes/:recipeID', element: <RecipeData /> },
+        { path: 'recipes/:recipeId', element: <RecipeData /> },
         { path: 'categories', element: <Categories /> },
         { path: 'category', element: <CategoriesData /> },
         { path: 'users', element: <UsersList /> },

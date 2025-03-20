@@ -1,9 +1,11 @@
 import React from 'react';
 import { FaBell } from 'react-icons/fa';
-import profileImage from "../../../assets/images/profil-image.png"
+import noDataImg from '../../../assets/images/blank-user-img.webp';
+import { IMAGE_URL } from '../../Services/api/apiConfig';
 
 export default function Navbar({ loginData }) {
 
+  console.log(loginData)
   
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary m-3 rounded-4">
@@ -31,7 +33,7 @@ export default function Navbar({ loginData }) {
                 aria-expanded="false"
               >
                 <img
-                  src={profileImage}
+                  src={loginData?.profileImage ? `${IMAGE_URL}/${loginData?.profileImage}` : `${noDataImg}`}
                   alt="Profile Image"
                   className="rounded-circle me-1"
                   style={{ width: '30px', height: '30px' }}
