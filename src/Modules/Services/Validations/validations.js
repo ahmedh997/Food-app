@@ -7,6 +7,16 @@ export const emailValidation = {
 };
 
 
+export const userNameValidation = {
+    required: 'User Name is required',
+    length: { value: 8, message: 'The User Name may not be greater than 8 characters' },
+    pattern: {
+        value: /^[A-Za-z]+[A-Za-z0-9]*\d$/,
+        message: 'The User Name must contain characters and end with numbers without spaces.'
+    }
+};
+
+
 export const passwordValidation = {
     required: 'Password is required',
     minLength: { value: 6, message: 'Min length 6 chars' },
