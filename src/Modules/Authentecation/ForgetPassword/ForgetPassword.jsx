@@ -1,8 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { ToastContainer, toast } from 'react-toastify';
-import { axiosClient, USER_URLS } from '../../Services/urls/urls';
+import { toast } from 'react-toastify';
 import { emailValidation } from '../../Services/Validations/validations';
 import { apiInstance } from '../../Services/api/apiInstance';
 import { USERS_ENDPOINTS } from '../../Services/api/apiConfig';

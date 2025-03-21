@@ -15,7 +15,7 @@ export default function Register() {
   const togglePasswordVisibility = () => setShowPassword(!ShowPassword);
   const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!ShowConfirmPassword);
 
-  let { register, formState: { errors, isSubmitting }, handleSubmit, watch, trigger } = useForm();
+  let { register, formState: { errors, isSubmitting }, handleSubmit, watch, trigger } = useForm({ mode: "onChange" });
 
   const password = watch("password");
   const confirmPassword = watch("confirmPassword");
@@ -150,7 +150,7 @@ export default function Register() {
             </span>
             <input {...register('phoneNumber', { required: 'Phone Number is required' })} type='tel' className="form-control" placeholder="Phone Number" aria-label="Phone" aria-describedby="basic-addon1" />
           </div>
-          {errors.phone && <span className='text-danger'>{errors.phone.message}</span>}
+          {errors.phoneNumber && <span className='text-danger'>{errors.phoneNumber.message}</span>}
 
           {/* Confirm password  */}
           <div className="d-flex input-group align-items-center justify-content-between mb-2 mt-4">

@@ -48,8 +48,8 @@ export default function RecipeData() {
   let { register, formState: { errors, isSubmitting }, handleSubmit, setValue } = useForm();
 
 
-  // add New Category
-  const addNewRecipe = async (data) => {
+  // add New & edit recipe
+  const onSubmit = async (data) => {
     const formData = new FormData();
 
     for (let key in data) {
@@ -130,7 +130,7 @@ return <>
 
 
       <section className="m-3 m-auto p-5 w-75 add-section">
-        <form onSubmit={handleSubmit(addNewRecipe)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="">
             <div className="form-inputs input-group mb-3">
               <input {...register('name', { required: 'Name is Required' })} type="text" className="form-control py-3" placeholder="Recipe Name" aria-label="Name" aria-describedby="basic-addon1" />

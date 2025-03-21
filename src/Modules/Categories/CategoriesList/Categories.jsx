@@ -75,7 +75,7 @@ export default function Categories() {
       console.log(addNew);
       getCategoriesList();
       toast.success('Category added successfully');
-      document.getElementById("closeAddCategory").click();
+      document.getElementById("closeModal").click();
     }
     catch (error) {
       console.log(error);
@@ -90,7 +90,7 @@ export default function Categories() {
       console.log(updateCategory);
       getCategoriesList();
       toast.success('Category updated successfully');
-      document.getElementById("closeEditCategory").click();
+      document.getElementById("closeModal").click();
     }
     catch (error) {
       console.log(error);
@@ -162,7 +162,7 @@ export default function Categories() {
                           <FiEye aria-label='Eye' className="me-2 text-success" /> View
                         </a>
                       </li>
-                      <li data-bs-toggle="modal" data-bs-target="#editCategory" onClick={() => {setSelectedCategoryId(category?.id);setSelectedCategory(category)}}>
+                      <li data-bs-toggle="modal" data-bs-target="#addNewCategory" onClick={() => { setSelectedCategoryId(category?.id); setSelectedCategory(category); }}>
                         <a role="button" className="dropdown-item d-flex align-items-center" >
                           <FiEdit aria-label='Edit' className="me-2 text-success" /> Edit
                         </a>
