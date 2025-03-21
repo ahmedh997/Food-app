@@ -60,20 +60,8 @@ export default function RecipeData() {
         formData.append(key, data?.[key]);
       }
     }
-    if (recipeId !== 'new-recipe') {
-      try {
-        let editRecipe = await privateApiInstance.put(RECIPES_ENDPOINTS.UPDATE_RECIPE(recipeId), data);
-        console.log(editRecipe);
-        getCategoriesList();
-        toast.success('Category Updated successfully');
-        Navigate('/dashboard/recipes');
-      }
-      catch (error) {
-        console.log(error?.response?.data?.message);
-        toast.error(error?.response?.data?.message);
-      }
-    }
-    else {
+    if (recipeId === undefined) {
+
       try {
         let addNew = await privateApiInstance.post(RECIPES_ENDPOINTS.ADD_RECIPE, formData);
         console.log(addNew);
@@ -84,6 +72,19 @@ export default function RecipeData() {
       catch (error) {
         console.log(error);
         toast.error(error.response.data.message);
+      }
+    }
+    else {
+      try {
+        let editRecipe = await privateApiInstance.put(RECIPES_ENDPOINTS.UPDATE_RECIPE(recipeId), data);
+        console.log(editRecipe);
+        getCategoriesList();
+        toast.success('Category Updated successfully');
+        Navigate('/dashboard/recipes');
+      }
+      catch (error) {
+        console.log(error?.response?.data?.message);
+        toast.error(error?.response?.data?.message);
       }
 
     }
@@ -103,7 +104,7 @@ export default function RecipeData() {
         setValue('tagId', recipe?.tag?.id);
         setValue('recipeImage', recipe?.recipeImage?.[0]);
         setValue('description', recipe?.description);
-        setValue('categoriesIds', recipe?.category?.[0].id);
+        setValue('categoriesIds', String(recipe?.category?.[0].id));
       };
       getRecipe();
     }
@@ -157,6 +158,8 @@ return <>
 
             </select>
           </div>
+          {errors.tagId && <span className='text-danger mb-2'>{errors.tagId.message}</span>}
+
 
           {/* select category */}
           <div className={`form-inputs input-group mb-3 d-flex`}>
@@ -167,11 +170,11 @@ return <>
               ))}
             </select>
           </div>
-
+          {errors.categoriesIds && <span className='text-danger'>{errors.categoriesIds.message}</span>}
 
           <div className="">
             <div className="form-inputs input-group mb-3">
-              <textarea {...register('description')} type="text" className="form-control py-3" placeholder="description" aria-label="description" aria-describedby="basic-addon1" />
+              <textarea {...register('description' , { required: 'Description is Required' })} type="text" className="form-control py-3" placeholder="description" aria-label="description" aria-describedby="basic-addon1" />
             </div>
           </div>
           {errors.description && <span className='text-danger'>{errors.description.message}</span>}

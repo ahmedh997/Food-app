@@ -17,6 +17,7 @@ export default function RecipesList() {
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [arrayOfPages, setArrayOfPages] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
 
   const [categories, setCategories] = useState([]);
@@ -32,6 +33,7 @@ export default function RecipesList() {
     }
     catch (error) {
       console.log(error);
+      toast.error('Error getting categories');
       setLoading(false);
     }
 
@@ -47,6 +49,7 @@ export default function RecipesList() {
     }
     catch (error) {
       console.log(error);
+      toast.error('Error getting tags');
       setLoading(false);
     }
 
@@ -71,22 +74,29 @@ export default function RecipesList() {
     }
     catch (error) {
       console.log(error);
+      toast.error('Error getting recipes');
       setLoading(false);
     }
 
   };
   // delete Recipe Id
   const deleteRecipeId = async () => {
+    setIsSubmitting(true);
     try {
       let remove = await privateApiInstance.delete(RECIPES_ENDPOINTS.DELETE_RECIPE(selectedRecipeId));
       console.log(remove);
       getRecipesList();
+      setIsSubmitting(false);
       toast.success('Recipe deleted successfully');
       document.getElementById("closeConfirmDelete").click();
     }
     catch (error) {
       console.log(error);
-
+      setIsSubmitting(false);
+      toast.error('Error deleting recipe');
+    }
+    finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -164,7 +174,7 @@ export default function RecipesList() {
                             <FiEdit aria-label='Edit' className="me-2 text-success" /> Edit
                           </a>
                         </Link>
-                        <li onClick={() => setSelectedRecipeId(recipe?.id)} data-bs-toggle="modal"
+                        <li onClick={() => {setSelectedRecipeId(recipe?.id); setIsSubmitting(false)}} data-bs-toggle="modal"
                           data-bs-target="#confirmDeleteModal">
                           <a role="button" className="dropdown-item d-flex align-items-center text-danger">
                             <FiTrash2 aria-label='Trash' className="me-2 text-danger" /> Delete
@@ -195,7 +205,7 @@ export default function RecipesList() {
     <ConfirmDelete deleteAction={deleteRecipeId} item={'Item'} />
 
 
-    <Pagination getList={getRecipesList} arrayOfPages={arrayOfPages} />
+    <Pagination getList={getRecipesList} arrayOfPages={arrayOfPages} isSubmitting={isSubmitting} />
 
   </>;
 

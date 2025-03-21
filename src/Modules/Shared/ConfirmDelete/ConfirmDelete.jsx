@@ -2,9 +2,12 @@ import React from 'react';
 import notFoundImg from '../../../assets/images/Not-found-delete.png';
 
 
-export default function ConfirmDelete({ deleteAction, item }) {
+export default function ConfirmDelete({ deleteAction, item, isSubmitting }) {
 
-
+    console.log(isSubmitting);
+    
+    
+     
     return <>
 
         <div className="modal fade px-5 py-3" tabIndex={-1} id="confirmDeleteModal" aria-hidden="true" >
@@ -27,7 +30,7 @@ export default function ConfirmDelete({ deleteAction, item }) {
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-outline-danger" onClick={deleteAction}>Delete This {item}</button>
+                        <button type="button" disabled={isSubmitting} className="btn btn-outline-danger" onClick={deleteAction}>{isSubmitting ? <i className='fas fa-spin fa-spinner'></i> : `Delete This ${item}`}</button>
                     </div>
                 </div>
             </div>
