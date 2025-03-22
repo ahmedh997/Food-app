@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
 import { Outlet } from 'react-router-dom';
-import SideBar from '../Sidebar/Sidebar';
+import SideBar from '../SideBar/SideBar';
 
 
 export default function MasterLayout({ loginData }) {
@@ -18,7 +18,7 @@ export default function MasterLayout({ loginData }) {
 
 
       <div className='sidebar-icons'>
-        <SideBar />
+        <SideBar loginData={loginData} />
       </div>
       <div className='w-100'>
         <Navbar loginData={loginData} />

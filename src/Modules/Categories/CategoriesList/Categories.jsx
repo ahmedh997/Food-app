@@ -132,8 +132,8 @@ export default function Categories() {
       </> : categoriesList?.length > 0 ?
 
         <table className="table table-striped table-borderless table-light">
-          <thead>
-            <tr className='text-center'>
+            <thead className='custom-thead'>
+            <tr className='text-center custom-tr'>
               <th className="p-4" scope="col">ID</th>
               <th className="p-4" scope="col">Item Name</th>
               <th className="p-4" scope="col">Creation date</th>

@@ -31,7 +31,7 @@ export default function Pagination({ getList, arrayOfPages, itemsPerPage = 5 }) 
     }
 
     return (
-        <nav aria-label="Page navigation" className="m-3">
+        <nav aria-label="Page navigation" className="m-3  d-flex  justify-content-end">
             <ul className="pagination">
                 <li className={`page-item ${currentNumber === 1 ? 'disabled' : ''}`}>
                     <button
@@ -40,7 +40,7 @@ export default function Pagination({ getList, arrayOfPages, itemsPerPage = 5 }) 
                         disabled={currentNumber === 1}
                         aria-label="Previous"
                     >
-                        <span aria-hidden="true">&laquo;</span>
+                        <span aria-hidden="true">Previous</span>
                     </button>
                 </li>
 
@@ -114,7 +114,7 @@ export default function Pagination({ getList, arrayOfPages, itemsPerPage = 5 }) 
                         disabled={currentNumber === arrayOfPages.length}
                         aria-label="Next"
                     >
-                        <span aria-hidden="true">&raquo;</span>
+                        <span aria-hidden="true">Next</span>
                     </button>
                 </li>
             </ul>

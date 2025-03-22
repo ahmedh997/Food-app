@@ -133,7 +133,7 @@ export default function RecipesList() {
       </>
         : recipesList?.length > 0 ?
           <table className="table table-striped table-borderless table-light">
-            <thead className="rounded-4">
+            <thead className="custom-thead">
               <tr className="text-center bg-light">
                 <th className="p-4" scope="col">Item Name</th>
                 <th className="p-4" scope="col">Image</th>
@@ -148,7 +148,7 @@ export default function RecipesList() {
               {recipesList?.map((recipe) => <>
                 <tr key={recipe?.id} className='text-center'>
                   <td data-label="Item Name">{recipe?.name}</td>
-                  <td data-label="Image"><img style={{ maxWidth: 70, height: 70, objectFit: 'cover' }} loading='lazy' className='img-fluid rounded w-100' src={recipe?.imagePath ? `${IMAGE_URL}/${recipe?.imagePath}` : `${noDataImg}`} alt="User Image" /> </td>
+                  <td data-label="Image"><img style={{ maxWidth: 70, height: 70, objectFit: 'cover' }} loading='lazy' className='img-fluid rounded w-100' src={recipe?.imagePath ? `${IMAGE_URL}/${recipe?.imagePath}` : `${noDataImg}`} alt="Recipe Image" /> </td>
                   <td data-label="Price">{recipe?.price} EGP</td>
                   <td data-label="Description" className='text-wrap'>{recipe?.description}</td>
                   <td data-label="Tag">{recipe?.tag?.name}</td>

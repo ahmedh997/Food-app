@@ -2,11 +2,11 @@ import React, { use, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import logo from '../../../assets/images/logo-sidebar.png';
-import { FiHome, FiUsers, FiGrid, FiCalendar, FiLock, FiLogOut } from "react-icons/fi";
+import { FiHome, FiUsers, FiGrid, FiCalendar, FiLock, FiLogOut , FiHeart } from "react-icons/fi";
 import { toast } from 'react-toastify';
 import ChangePassword from '../../Authentecation/ChangePassword/ChangePassword';
 
-export default function SideBar() {
+export default function SideBar({ loginData }) {
 
 
   const location = useLocation();
@@ -40,21 +40,24 @@ export default function SideBar() {
     if (path.includes('/recipes')) title = "Recipes | Food App";
     if (path.includes('/categories')) title = "Categories | Food App";
     if (path.includes('/users')) title = "Users | Food App";
+    if (path.includes('/favorites')) title = "Favorites | Food App";
 
-    document.title = title;
-  }, [location.pathname]);
 
-  useEffect(() => {
     let activeItem = '';
 
     if (location.pathname.includes('/dashboard')) activeItem = 'home';
     if (location.pathname.includes('/categories')) activeItem = 'categories';
     if (location.pathname.includes('/recipes')) activeItem = 'recipes';
     if (location.pathname.includes('/users')) activeItem = 'users';
+    if (location.pathname.includes('/favorites')) activeItem = 'favorites';
 
-    setActive(activeItem)
+    setActive(activeItem);
     localStorage.setItem('isActiveMenu', activeItem);
+
+    document.title = title;
+
   }, [location.pathname]);
+
 
 
 
@@ -69,9 +72,10 @@ export default function SideBar() {
 
           <MenuItem className='text-white sidebar-logo' onClick={toggleSidebar} icon={<img width={100} src={logo} />} >  </MenuItem>
           <MenuItem className={`text white ${active === 'home' ? 'active' : ''}`} onClick={() => { handleMenuItemClick('home'); }} icon={<FiHome aria-label='Home' className="text-white text-2xl" />} component={<Link to='/dashboard' />}> Home </MenuItem>
-          <MenuItem className={`text white ${active === 'users' ? 'active' : ''}`} onClick={() => { handleMenuItemClick('users'); }} icon={<FiUsers aria-label='Users' className="text-white text-2xl" />} component={<Link to='/dashboard/users' />}> Users </MenuItem>
+          {loginData?.userGroup == 'SuperAdmin' ? <MenuItem className={`text white ${active === 'users' ? 'active' : ''}`} onClick={() => { handleMenuItemClick('users'); }} icon={<FiUsers aria-label='Users' className="text-white text-2xl" />} component={<Link to='/dashboard/users' />}> Users </MenuItem> : ''}  
           <MenuItem className={`text white ${active === 'recipes' ? 'active' : ''}`} onClick={() => { handleMenuItemClick('recipes'); }} icon={<FiGrid aria-label='Grid' className="text-white text-2xl" />} component={<Link to='/dashboard/recipes' />}>Recipes  </MenuItem>
-          <MenuItem className={`text white ${active === 'categories' ? 'active' : ''}`} onClick={() => { handleMenuItemClick('categories'); }} icon={<FiCalendar aria-label='Calender' className="text-white text-2xl" />} component={<Link to='/dashboard/categories' />}> Categories </MenuItem>
+          {loginData?.userGroup == 'SystemUser' ? <MenuItem className={`text white ${active === 'favorites' ? 'active' : ''}`} onClick={() => { handleMenuItemClick('favorites'); }} icon={<FiHeart aria-label='Grid' className="text-white text-2xl" />} component={<Link to='/dashboard/favorites' />}>Favorites  </MenuItem> : ''}   
+          {loginData?.userGroup == 'SuperAdmin' ? <MenuItem className={`text white ${active === 'categories' ? 'active' : ''}`} onClick={() => { handleMenuItemClick('categories'); }} icon={<FiCalendar aria-label='Calender' className="text-white text-2xl" />} component={<Link to='/dashboard/categories' />}> Categories </MenuItem> : ''}
           <MenuItem
             icon={<FiLock aria-label='lock' className="text-white text-2xl" />}
             onClick={() => { document.getElementById("openChangePassword").click(); handleMenuItemClick('changePass'); }}

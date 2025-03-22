@@ -145,6 +145,36 @@ form .input-group-text {
   vertical-align: middle !important;
 }
 
+.custom-thead {
+  background-color: rgba(226, 229, 235, 1) !important;
+}
+
+.custom-thead th {
+  background-color: rgba(226, 229, 235, 1) !important;
+}
+
+.custom-thead th:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.custom-thead th:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+  --bs-table-color-type: var(--bs-table-striped-color);
+  --bs-table-bg-type: rgba(248, 249, 251, 1) !important;
+}
+
+
+.table-light {
+  
+--bs-table-bg: rgba(255, 255, 255, 1) !important;
+}
+
+
 /* ========================== */
 /* 404 Not Found Page */
 /* ========================== */
@@ -172,8 +202,8 @@ form .input-group-text {
 nav ul.pagination{
   --bs-pagination-active-bg:var(--main-color);
   --bs-pagination-active-border-color:var(--main-color);
-  --bs-pagination-color:var(--main-color);
-  --bs-pagination-hover-color:var(--main-color);
+  --bs-pagination-color:black;
+  --bs-pagination-hover-color: white;
   --bs-pagination-hover-bg:var(--main-color);
 }
 

@@ -17,6 +17,7 @@ import RecipeData from './Modules/Recipes/RecipeData/RecipeData';
 import UsersList from './Modules/Users/UsersList';
 import { jwtDecode } from 'jwt-decode';
 import ProtectedRoute from './Modules/Shared/ProtectedRoute/ProtectedRoute';
+import FavoritesList from './Modules/FavoritesList/FavoritesList';
 
 function App() {
 
@@ -85,6 +86,7 @@ function App() {
         { path: 'categories', element: <Categories /> },
         { path: 'category', element: <CategoriesData /> },
         { path: 'users', element: <UsersList /> },
+        { path: 'favorites', element: <FavoritesList /> },
       ]
     }
 

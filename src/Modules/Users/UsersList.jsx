@@ -89,7 +89,7 @@ export default function UsersList() {
         usersList?.length > 0 ?
 
           <table className="table table-striped table-borderless table-light">
-            <thead>
+            <thead className='custom-thead'>
               <tr className='text-center'>
                 <th className="p-4" scope="col">User Name</th>
                 <th className="p-4" scope="col">Image</th>

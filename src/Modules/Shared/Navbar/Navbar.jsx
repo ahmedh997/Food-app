@@ -38,7 +38,7 @@ export default function Navbar({ loginData }) {
                   className="rounded-circle me-1"
                   style={{ width: '30px', height: '30px' }}
                 />
-                <span className='me-2'>{loginData?.userName}</span>
+                <span className='me-2'>{loginData?.userEmail}</span>
               </a>
               
               <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
