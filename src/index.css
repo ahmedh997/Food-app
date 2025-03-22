@@ -9,6 +9,13 @@
   --darker-green: rgba(0, 146, 71, 1);
 }
 
+/* Hide the default password toggle (eye) icon in Chrome & Edge */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none;
+}
+
 /* ========================== */
 /* Global Typography & Colors */
 /* ========================== */
