@@ -10,10 +10,12 @@ import { CATEGORIES_ENDPOINTS } from '../../Services/api/apiConfig';
 import Pagination from '../../Shared/Pagination/Pagination';
 import Filtration from '../../Shared/Filteration/Filtration';
 import CategoriesData from '../CategoriesData/CategoriesData';
+import { useNavigate } from 'react-router-dom';
 
 export default function Categories() {
 
 
+  const [loginData, setLoginData] = useState(null);
 
   const [categoriesList, setCategoriesList] = useState([]);
 
@@ -46,7 +48,8 @@ export default function Categories() {
       setArrayOfPages(Array(list?.data?.totalNumberOfPages).fill().map((_, index) => index + 1));
     }
     catch (error) {
-      console.log(error);
+      console.log(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message);
       setLoading(false);
     }
 
@@ -99,9 +102,14 @@ export default function Categories() {
 
   };
 
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCategoriesList();
+    setLoginData(JSON.parse(localStorage.getItem('userData')));
+    if (loginData?.userGroup !== 'SuperAdmin') {
+      navigate('/dashboard', toast.error('Access Denied'));
+    }
   }, []);
 
   return <>
@@ -132,7 +140,7 @@ export default function Categories() {
       </> : categoriesList?.length > 0 ?
 
         <table className="table table-striped table-borderless table-light">
-            <thead className='custom-thead'>
+          <thead className='custom-thead'>
             <tr className='text-center custom-tr'>
               <th className="p-4" scope="col">ID</th>
               <th className="p-4" scope="col">Item Name</th>

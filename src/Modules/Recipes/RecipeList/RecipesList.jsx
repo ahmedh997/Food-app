@@ -13,11 +13,12 @@ import Filtration from '../../Shared/Filteration/Filtration';
 import { Link } from 'react-router-dom';
 
 export default function RecipesList() {
+  const [loginData, setLoginData] = useState(null);
   const [recipesList, setRecipesList] = useState([]);
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [arrayOfPages, setArrayOfPages] = useState([]);
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
 
   const [categories, setCategories] = useState([]);
@@ -105,6 +106,7 @@ export default function RecipesList() {
     getRecipesList();
     getCategoriesList();
     getTagsList();
+    setLoginData(JSON.parse(localStorage.getItem('userData')));
   }, []);
 
   return <>
@@ -164,22 +166,36 @@ export default function RecipesList() {
                         <HiDotsHorizontal size={24} />
                       </button>
                       <ul className="dropdown-menu overflow-hidden border-0 rounded-5 shadow-lg w-100">
-                        <li>
+                        {loginData?.userGroup == 'SuperAdmin' ? <>
+
+                          <li>
+                            <a role="button" className="dropdown-item d-flex align-items-center">
+                              <FiEye aria-label='Eye' className="me-2 text-success" /> View
+                            </a>
+                          </li>
+                          <Link className='text-decoration-none' to={`/dashboard/recipes/${recipe?.id}`}>
+                            <a role="button" className="dropdown-item d-flex align-items-center">
+                              <FiEdit aria-label='Edit' className="me-2 text-success" /> Edit
+                            </a>
+                          </Link>
+                          <li onClick={() => { setSelectedRecipeId(recipe?.id); setIsSubmitting(false); }} data-bs-toggle="modal"
+                            data-bs-target="#confirmDeleteModal">
+                            <a role="button" className="dropdown-item d-flex align-items-center text-danger">
+                              <FiTrash2 aria-label='Trash' className="me-2 text-danger" /> Delete
+                            </a>
+                          </li>
+
+
+
+                        </> : <li>
                           <a role="button" className="dropdown-item d-flex align-items-center">
                             <FiEye aria-label='Eye' className="me-2 text-success" /> View
                           </a>
-                        </li>
-                        <Link className='text-decoration-none' to={`/dashboard/recipes/${recipe?.id}`}>
-                          <a role="button" className="dropdown-item d-flex align-items-center">
-                            <FiEdit aria-label='Edit' className="me-2 text-success" /> Edit
-                          </a>
-                        </Link>
-                        <li onClick={() => {setSelectedRecipeId(recipe?.id); setIsSubmitting(false)}} data-bs-toggle="modal"
-                          data-bs-target="#confirmDeleteModal">
-                          <a role="button" className="dropdown-item d-flex align-items-center text-danger">
-                            <FiTrash2 aria-label='Trash' className="me-2 text-danger" /> Delete
-                          </a>
-                        </li>
+                        </li>}
+                        
+                      
+                    
+
                       </ul>
                     </div>
                   </td>

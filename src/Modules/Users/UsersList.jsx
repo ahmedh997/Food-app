@@ -10,11 +10,12 @@ import { privateApiInstance } from '../Services/api/apiInstance';
 import noDataImg from '../../assets/images/blank-user-img.webp';
 import Pagination from '../Shared/Pagination/Pagination';
 import Filtration from '../Shared/Filteration/Filtration';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function UsersList() {
 
-
+  const [loginData, setLoginData] = useState(null);
   const [usersList, setUsersList] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -37,7 +38,8 @@ export default function UsersList() {
       setArrayOfPages(Array(users?.data?.totalNumberOfPages).fill().map((_, index) => index + 1));
     }
     catch (error) {
-      console.log(error);
+      console.log(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message);
       setLoading(false);
     }
 
@@ -59,10 +61,14 @@ export default function UsersList() {
     }
   };
 
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUsersList();
+    setLoginData(JSON.parse(localStorage.getItem('userData')));
+    if (loginData?.userGroup !== 'SuperAdmin') {
+      navigate('/dashboard');
+    }
   }, []);
 
   return <>

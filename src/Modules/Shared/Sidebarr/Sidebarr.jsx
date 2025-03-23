@@ -6,7 +6,7 @@ import { FiHome, FiUsers, FiGrid, FiCalendar, FiLock, FiLogOut , FiHeart } from 
 import { toast } from 'react-toastify';
 import ChangePassword from '../../Authentecation/ChangePassword/ChangePassword';
 
-export default function SideBar({ loginData }) {
+export default function Sidebarr({ loginData }) {
 
 
   const location = useLocation();

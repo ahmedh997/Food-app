@@ -31,13 +31,14 @@ function App() {
       const token = localStorage.getItem('token');
       if (token) {
         const decodedData = jwtDecode(token);
+        localStorage.setItem('userData', JSON.stringify(decodedData));
         setloginData(decodedData);
 
       } else {
         setloginData(null);
       }
     } catch (error) {
-      console.error('Error decoding token:', error);
+      console.error('Error decoding token', error);
       setLoginData(null);
       localStorage.removeItem('token');
     }
