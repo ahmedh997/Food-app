@@ -245,14 +245,14 @@ export default function RecipesList() {
     {/* Add to favorite modal  */}
 
 
-    <Modal show={show} onHide={handleClose} animation={true} className='mt-5'>
+    <Modal show={show} onHide={handleClose} animation={true} className='mt-3'>
       <Modal.Header closeButton>
         <Modal.Title className='p-2'>Recipe details</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="container d-flex flex-column">
           <div className="recipe-image d-flex justify-content-center">
-            <img style={{ maxWidth: 250, height: 250, objectFit: 'contain' }} loading='lazy' className='img-fluid w-100 rounded-4 my-3' src={selectedRecipe?.imagePath ? `${IMAGE_URL}/${selectedRecipe?.imagePath}` : `${noDataImg}`} alt="Recipe Image" />
+            <img style={{ maxWidth: 250, height: 250, objectFit: 'cover' }} loading='lazy' className='img-fluid w-100 rounded-4 my-3' src={selectedRecipe?.imagePath ? `${IMAGE_URL}/${selectedRecipe?.imagePath}` : `${noDataImg}`} alt="Recipe Image" />
           </div>
           <div className="recipe-data">
             <h3 className='mb-2 text-capitalize text-center'>
@@ -260,7 +260,7 @@ export default function RecipesList() {
             </h3>
             <div className='text d-flex justify-content-between'>
               <p><span className='fw-bold'>Description: </span> {selectedRecipe?.description}</p>
-              <p className='text-success border border-2 rounded-pill px-3'>{`${selectedRecipe?.price} EGP `} </p>
+              <p className='text-success px-3'>{`${selectedRecipe?.price} EGP `} </p>
             </div>
             <div className='text'>
               <p><span className='fw-bold'>Tag: </span> {selectedRecipe?.tag?.name}</p>

@@ -83,12 +83,12 @@ export default function FavoritesList() {
                 <div className="recipe-body border shadow-sm rounded-4">
                   <i role='button' onClick={()=>removeFromFavorites(item?.id)} aria-label='Heart-broken' className='fas fa-heart-broken position-absolute top-0 end-0 p-2 m-2 bg-danger text-white rounded-5 border border-0'></i>
                   <img style={{ display: 'block', height: 200, width: '100%', objectFit: 'cover' }} loading='lazy' className=' rounded-4 ' src={item?.recipe?.imagePath ? `${IMAGE_URL}/${item?.recipe?.imagePath}` : `${noDataImg}`} alt="Recipe Image" />
-                  <div className="d-flex justify-content-between align-items-center p-3 border-bottom rounded-3">
+                  <div className="d-flex justify-content-between align-items-center p-3 border-bottom rounded-3 shadow-sm">
                     <h2 className="text-capitalize">{item?.recipe?.name}</h2>
                     <p className="text-success">{item?.recipe?.price} EGP</p>
                   </div>
 
-                  <div className="d-flex justify-content-between p-3">
+                  <div className="d-flex justify-content-between p-3 bg-light">
                     <p className="text-capitalize"><span className='fw-bold'>Description: </span>{item?.recipe?.description}</p>
 
                   </div>
