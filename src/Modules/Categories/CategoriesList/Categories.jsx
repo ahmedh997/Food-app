@@ -107,7 +107,7 @@ export default function Categories() {
   useEffect(() => {
     getCategoriesList();
     const userData = JSON.parse(localStorage.getItem('userData'));
-    setLoginData(userData)
+    setLoginData(userData);
     if (userData?.userGroup === 'SystemUser') {
       navigate('/dashboard');
     }
@@ -143,18 +143,22 @@ export default function Categories() {
         <table className="table table-striped table-borderless table-light">
           <thead className='custom-thead'>
             <tr className='text-center custom-tr'>
-              <th className="p-4" scope="col">ID</th>
               <th className="p-4" scope="col">Item Name</th>
               <th className="p-4" scope="col">Creation date</th>
+              <th className="p-4" scope="col">Modification Date</th>
               <th className="p-4" scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
             {categoriesList?.map((category) => <>
               <tr key={category?.id} className='text-center'>
-                <td data-label="ID">{category?.id}</td>
                 <td data-label="Name">{category?.name}</td>
-                <td data-label="Creation Date">{category?.creationDate}</td>
+                <td data-label="Creation Date">
+                  {new Date(category?.creationDate).toLocaleDateString()}
+                </td>
+                <td data-label="Modification Date">
+                  {new Date(category?.modificationDate).toLocaleDateString()}
+                </td>
                 <td>
                   <div className="dropdown">
                     <button

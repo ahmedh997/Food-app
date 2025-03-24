@@ -199,7 +199,7 @@ export default function RecipesList() {
                       >
                         <HiDotsHorizontal size={24} />
                       </button>
-                      <ul className="dropdown-menu overflow-hidden border-0 rounded-5 shadow-lg w-100">
+                      <ul className="dropdown-menu overflow-hidden border-0 rounded-5 shadow-sm w-100">
                         {loginData?.userGroup == 'SuperAdmin' ? <>
 
                           <li>
@@ -251,18 +251,18 @@ export default function RecipesList() {
       </Modal.Header>
       <Modal.Body>
         <div className="container d-flex flex-column">
-          <div className="recipe-image d-flex justify-content-center">
+          <div className="recipe-image d-flex justify-content-center position-relative">
+            <p className='text-white fw-bold position-absolute end-0 px-3 py-1 mx-5 my-4 rounded-pill bg-success shadow-lg'>{`${selectedRecipe?.price} EGP `} </p>
             <img style={{ maxWidth: 250, height: 250, objectFit: 'cover' }} loading='lazy' className='img-fluid w-100 rounded-4 my-3' src={selectedRecipe?.imagePath ? `${IMAGE_URL}/${selectedRecipe?.imagePath}` : `${noDataImg}`} alt="Recipe Image" />
           </div>
           <div className="recipe-data">
-            <h3 className='mb-2 text-capitalize text-center'>
+            <h3 className='mb-2 text-capitalize text-center p-3 border-bottom '>
               {selectedRecipe?.name}
             </h3>
             <div className='text d-flex justify-content-between'>
               <p><span className='fw-bold'>Description: </span> {selectedRecipe?.description}</p>
-              <p className='text-success px-3'>{`${selectedRecipe?.price} EGP `} </p>
             </div>
-            <div className='text'>
+            <div className='text '>
               <p><span className='fw-bold'>Tag: </span> {selectedRecipe?.tag?.name}</p>
               <p className=''><span className='fw-bold'>Category: </span>{selectedRecipe?.category?.[0].name}</p>
             </div>

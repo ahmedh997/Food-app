@@ -55,7 +55,7 @@ export default function Sidebarr({ loginData }) {
         setActive(activeItem);
         localStorage.setItem('isActiveMenu', activeItem);
 
-        document.title = title;
+        document.title = title;     
 
     }, [location.pathname]);
 
