@@ -106,11 +106,12 @@ export default function Categories() {
 
   useEffect(() => {
     getCategoriesList();
-    setLoginData(JSON.parse(localStorage.getItem('userData')));
-    if (loginData?.userGroup !== 'SuperAdmin') {
-      navigate('/dashboard', toast.error('Access Denied'));
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    setLoginData(userData)
+    if (userData?.userGroup === 'SystemUser') {
+      navigate('/dashboard');
     }
-  }, []);
+  }, [navigate]);
 
   return <>
 

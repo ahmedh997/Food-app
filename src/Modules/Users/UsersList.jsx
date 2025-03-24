@@ -65,11 +65,12 @@ export default function UsersList() {
 
   useEffect(() => {
     getUsersList();
-    setLoginData(JSON.parse(localStorage.getItem('userData')));
-    if (loginData?.userGroup !== 'SuperAdmin') {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    setLoginData(userData)
+    if (userData?.userGroup === 'SystemUser') {
       navigate('/dashboard');
     }
-  }, []);
+  }, [navigate]);
 
   return <>
 

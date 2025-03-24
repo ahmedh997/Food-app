@@ -79,7 +79,7 @@ export default function RecipeData() {
         let editRecipe = await privateApiInstance.put(RECIPES_ENDPOINTS.UPDATE_RECIPE(recipeId), data);
         console.log(editRecipe);
         getCategoriesList();
-        toast.success('Category Updated successfully');
+        toast.success('Recipe Updated successfully');
         Navigate('/dashboard/recipes');
       }
       catch (error) {

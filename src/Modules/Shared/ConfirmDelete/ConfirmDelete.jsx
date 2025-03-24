@@ -2,10 +2,7 @@ import React from 'react';
 import notFoundImg from '../../../assets/images/Not-found-delete.png';
 
 
-export default function ConfirmDelete({ deleteAction, item, isSubmitting }) {
-
-    console.log(isSubmitting);
-    
+export default function ConfirmDelete({ deleteAction, item, loading }) {    
     
      
     return <>
@@ -30,7 +27,7 @@ export default function ConfirmDelete({ deleteAction, item, isSubmitting }) {
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" disabled={isSubmitting} className="btn btn-outline-danger" onClick={deleteAction}>{isSubmitting ? <i className='fas fa-spin fa-spinner'></i> : `Delete This ${item}`}</button>
+                        <button type="button" disabled={loading} className="btn btn-outline-danger" onClick={deleteAction}>{loading ? <i className='fas fa-spin fa-spinner'></i> : `Delete This ${item}`}</button>
                     </div>
                 </div>
             </div>

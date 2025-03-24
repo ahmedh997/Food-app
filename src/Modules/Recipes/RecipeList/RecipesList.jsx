@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../Shared/Header/Header';
 import { HiDotsHorizontal } from 'react-icons/hi';
-import noDataImg from '../../../assets/images/no-img.jpeg';
+import noDataImg from '../../../assets/images/no image.jpg';
 import { FiEye, FiEdit, FiTrash2 } from "react-icons/fi";
 import NoData from '../../Shared/NoData/NoData';
 import ConfirmDelete from '../../Shared/ConfirmDelete/ConfirmDelete';
-import { CATEGORIES_ENDPOINTS, IMAGE_URL, RECIPES_ENDPOINTS, TAGS_ENDPOINT } from '../../Services/api/apiConfig';
+import { CATEGORIES_ENDPOINTS, FAVORITES_ENDPOINTS, IMAGE_URL, RECIPES_ENDPOINTS, TAGS_ENDPOINT } from '../../Services/api/apiConfig';
 import { privateApiInstance } from '../../Services/api/apiInstance';
 import { toast } from 'react-toastify';
 import Pagination from '../../Shared/Pagination/Pagination';
 import Filtration from '../../Shared/Filteration/Filtration';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 export default function RecipesList() {
   const [loginData, setLoginData] = useState(null);
@@ -19,10 +21,18 @@ export default function RecipesList() {
   const [loading, setLoading] = useState(true);
   const [arrayOfPages, setArrayOfPages] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+
 
 
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
+
+  // Modal functions 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   // get Categories List
   const getCategoriesList = async () => {
@@ -88,12 +98,14 @@ export default function RecipesList() {
       console.log(remove);
       getRecipesList();
       setIsSubmitting(false);
+      setLoading(false);
       toast.success('Recipe deleted successfully');
       document.getElementById("closeConfirmDelete").click();
     }
     catch (error) {
       console.log(error);
       setIsSubmitting(false);
+      setLoading(false);
       toast.error('Error deleting recipe');
     }
     finally {
@@ -101,12 +113,34 @@ export default function RecipesList() {
     }
   };
 
+  const addToFav = async (selectedRecipeId) => {
+    
+    try {
+      let list = await privateApiInstance.post(FAVORITES_ENDPOINTS.ADD_FAVORITES, { 'recipeId': selectedRecipeId });
+      console.log(list?.data);
+      toast.success('Item Added to your Favorites List');
+      setLoading(false);
+      handleClose()
+
+    }
+    catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message || 'Error getting Favorites');
+      setLoading(false);
+    }
+
+  };
+
+
+
 
   useEffect(() => {
     getRecipesList();
     getCategoriesList();
     getTagsList();
-    setLoginData(JSON.parse(localStorage.getItem('userData')));
+
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    setLoginData(userData);
   }, []);
 
   return <>
@@ -119,7 +153,7 @@ export default function RecipesList() {
       </div>
       <div className="button-add ">
         {/* <button className='btn btn-success px-4 py-2'>Add new Recipe</button> */}
-        <Link to={'/dashboard/recipes/new-recipe'} className='btn btn-success px-4 py-2'>Add new Recipe</Link>
+        {loginData?.userGroup === 'SystemUser' ? '' : <Link to={'/dashboard/recipes/new-recipe'} className='btn btn-success px-4 py-2'>Add new Recipe</Link>}
       </div>
     </div>
     <div className="recipe-container m-3 rounded-4">
@@ -169,32 +203,33 @@ export default function RecipesList() {
                         {loginData?.userGroup == 'SuperAdmin' ? <>
 
                           <li>
-                            <a role="button" className="dropdown-item d-flex align-items-center">
-                              <FiEye aria-label='Eye' className="me-2 text-success" /> View
+                            <a role="button" className="dropdown-item d-flex align-items-center" onClick={() => { setSelectedRecipe(recipe); handleShow(); }} >
+                              <FiEye aria-label='Eye' className="me-2 icon-dropdown" /> View
                             </a>
                           </li>
+
                           <Link className='text-decoration-none' to={`/dashboard/recipes/${recipe?.id}`}>
                             <a role="button" className="dropdown-item d-flex align-items-center">
-                              <FiEdit aria-label='Edit' className="me-2 text-success" /> Edit
+                              <FiEdit aria-label='Edit' className="me-2 icon-dropdown" /> Edit
                             </a>
                           </Link>
                           <li onClick={() => { setSelectedRecipeId(recipe?.id); setIsSubmitting(false); }} data-bs-toggle="modal"
                             data-bs-target="#confirmDeleteModal">
                             <a role="button" className="dropdown-item d-flex align-items-center text-danger">
-                              <FiTrash2 aria-label='Trash' className="me-2 text-danger" /> Delete
+                              <FiTrash2 aria-label='Trash' className="me-2 icon-dropdown" /> Delete
                             </a>
                           </li>
 
 
 
                         </> : <li>
-                          <a role="button" className="dropdown-item d-flex align-items-center">
-                            <FiEye aria-label='Eye' className="me-2 text-success" /> View
+                          <a role="button" className="dropdown-item d-flex align-items-center" onClick={() => { setSelectedRecipe(recipe); handleShow() }} >
+                            <FiEye aria-label='Eye' className="me-2 icon-dropdown" /> View
                           </a>
                         </li>}
-                        
-                      
-                    
+
+
+
 
                       </ul>
                     </div>
@@ -207,6 +242,46 @@ export default function RecipesList() {
           </table> : <NoData />}
     </div>
 
+    {/* Add to favorite modal  */}
+
+
+    <Modal show={show} onHide={handleClose} animation={true} className='mt-5'>
+      <Modal.Header closeButton>
+        <Modal.Title className='p-2'>Recipe details</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="container d-flex flex-column">
+          <div className="recipe-image d-flex justify-content-center">
+            <img style={{ maxWidth: 250, height: 250, objectFit: 'contain' }} loading='lazy' className='img-fluid w-100 rounded-4 my-3' src={selectedRecipe?.imagePath ? `${IMAGE_URL}/${selectedRecipe?.imagePath}` : `${noDataImg}`} alt="Recipe Image" />
+          </div>
+          <div className="recipe-data">
+            <h3 className='mb-2 text-capitalize text-center'>
+              {selectedRecipe?.name}
+            </h3>
+            <div className='text d-flex justify-content-between'>
+              <p><span className='fw-bold'>Description: </span> {selectedRecipe?.description}</p>
+              <p className='text-success border border-2 rounded-pill px-3'>{`${selectedRecipe?.price} EGP `} </p>
+            </div>
+            <div className='text'>
+              <p><span className='fw-bold'>Tag: </span> {selectedRecipe?.tag?.name}</p>
+              <p className=''><span className='fw-bold'>Category: </span>{selectedRecipe?.category?.[0].name}</p>
+            </div>
+          </div>
+
+        </div>
+      </Modal.Body>
+      {loginData?.userGroup === 'SuperAdmin' ?  <>
+      
+      </> :  <Modal.Footer>
+        <Button disabled={loading} variant="outline-dark" onClick={() => { addToFav(selectedRecipe?.id); }}>
+          {loading ? <i className='fas fa-spin fa-spinner'></i> : 'Add To Favorites'}
+        </Button>
+      </Modal.Footer>}
+    </Modal>
+
+
+
+
 
     <button
       id="openConfirmDelete"
@@ -218,7 +293,7 @@ export default function RecipesList() {
 
     </button>
 
-    <ConfirmDelete deleteAction={deleteRecipeId} item={'Item'} />
+    <ConfirmDelete deleteAction={deleteRecipeId} item={'Item'} loading={loading} />
 
 
     <Pagination getList={getRecipesList} arrayOfPages={arrayOfPages} isSubmitting={isSubmitting} />

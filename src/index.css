@@ -23,11 +23,11 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   color: var(--darker-green) !important;
 }
 
-.bg-addnew{
+.bg-addnew {
   background-color: rgba(240, 255, 239, 1) !important;
 }
 
-.bg-add-img{
+.bg-add-img {
   background-color: rgba(240, 255, 239, 1) !important;
   border: var(--main-color) dashed 2px;
 }
@@ -113,6 +113,7 @@ form .input-group-text {
   background-color: rgba(0, 146, 77, 0.1) !important;
   border-left: rgba(0, 146, 71, 1) solid 3px;
 }
+
 .sidebar-container .active {
   background-color: rgba(0, 146, 77, 0.1) !important;
   border-left: rgba(0, 146, 71, 1) solid 3px;
@@ -177,8 +178,8 @@ form .input-group-text {
 
 
 .table-light {
-  
---bs-table-bg: rgba(255, 255, 255, 1) !important;
+
+  --bs-table-bg: rgba(255, 255, 255, 1) !important;
 }
 
 
@@ -193,7 +194,7 @@ form .input-group-text {
   width: 100vw;
   height: 100vh;
   background-color: white;
-  background-blend-mode: multiply  ;
+  background-blend-mode: multiply;
 }
 
 /* ========================== */
@@ -206,18 +207,30 @@ form .input-group-text {
 /* ========================== */
 /* Pagination */
 /* ========================== */
-nav ul.pagination{
-  --bs-pagination-active-bg:var(--main-color);
-  --bs-pagination-active-border-color:var(--main-color);
-  --bs-pagination-color:black;
+nav ul.pagination {
+  --bs-pagination-active-bg: var(--main-color);
+  --bs-pagination-active-border-color: var(--main-color);
+  --bs-pagination-color: black;
   --bs-pagination-hover-color: white;
-  --bs-pagination-hover-bg:var(--main-color);
+  --bs-pagination-hover-bg: var(--main-color);
 }
 
 /* ========================== */
 /* Recipe Image Input */
 /* ========================== */
 
-.file-input{
+.file-input {
   display: none;
+}
+
+/* ========================== */
+/* DropDown menu */
+/* ========================== */
+
+.dropdown-item:active {
+  background-color: var(--main-color) !important
+}
+
+.icon-dropdown:active{
+  color: white !important;
 }
