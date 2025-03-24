@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaBell } from 'react-icons/fa';
 import noDataImg from '../../../assets/images/blank-user-img.webp';
 import { IMAGE_URL } from '../../Services/api/apiConfig';
+import Modal from 'react-bootstrap/Modal';
+
 
 export default function Navbar({ loginData }) {
 
-  console.log(loginData)
-  
-  return (
+
+  // Modal functions 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
+  console.log(loginData);
+
+  return <>
     <nav className="navbar navbar-expand-lg bg-body-tertiary m-3 rounded-4">
       <div className="container-fluid">
         <button
@@ -40,24 +50,11 @@ export default function Navbar({ loginData }) {
                 />
                 <span className='me-2'>{loginData?.userEmail}</span>
               </a>
-              
+
               <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li>
-                  <a className="dropdown-item">
+                  <a className="dropdown-item" onClick={() => handleShow()}>
                     Profile
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item">
-                    Settings
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item">
-                    Logout
                   </a>
                 </li>
               </ul>
@@ -71,5 +68,35 @@ export default function Navbar({ loginData }) {
         </div>
       </div>
     </nav>
-  );
+
+    {/* Show user  */}
+
+    <Modal show={show} onHide={handleClose} animation={true} className='mt-3'>
+      <Modal.Header closeButton className='px-4'>
+        <Modal.Title >User Data</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="container d-flex flex-column">
+          <div className="user-image d-flex justify-content-center">
+            <img style={{ maxWidth: 250, height: 250, objectFit: 'cover' }} loading='lazy' className='img-fluid w-100 rounded-circle my-3' src={loginData?.imagePath ? `${IMAGE_URL}/${loginData?.imagePath}` : `${noDataImg}`} alt="Recipe Image" />
+          </div>
+          <div className="recipe-data">
+            <div className='mb-2 text-capitalize text-center p-3 border-bottom '>
+              <h2>{loginData?.userName}</h2>
+              <p className='text-white fw-light w-50 m-auto px-3 rounded-pill bg-success shadow-lg'>Role: <span className='fw-medium'>{`${loginData?.userGroup}`}</span> </p>
+            </div>
+            <div className='text d-flex justify-content-between text-left'>
+              <p><span className='fw-bold'>Email: </span> {loginData?.userEmail}</p>
+              
+            </div>
+
+          </div>
+
+        </div>
+      </Modal.Body>
+    </Modal>
+
+
+
+  </>;
 }

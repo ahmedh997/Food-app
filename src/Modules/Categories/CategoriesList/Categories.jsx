@@ -11,6 +11,7 @@ import Pagination from '../../Shared/Pagination/Pagination';
 import Filtration from '../../Shared/Filteration/Filtration';
 import CategoriesData from '../CategoriesData/CategoriesData';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
 
 export default function Categories() {
 
@@ -29,6 +30,11 @@ export default function Categories() {
 
   const [arrayOfPages, setArrayOfPages] = useState([]);
 
+  // Modal functions 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
 
 
@@ -171,7 +177,7 @@ export default function Categories() {
                     </button>
                     <ul className="dropdown-menu overflow-hidden border-0 rounded-5 shadow-lg w-100">
                       <li>
-                        <a role="button" className="dropdown-item d-flex align-items-center">
+                        <a role="button" className="dropdown-item d-flex align-items-center" onClick={() => { handleShow(); setSelectedCategory(category); }}>
                           <FiEye aria-label='Eye' className="me-2 text-success" /> View
                         </a>
                       </li>
@@ -196,6 +202,32 @@ export default function Categories() {
           </tbody>
         </table> : <NoData />}
     </div>
+
+    {/* Show Category Modal  */}
+
+    <Modal show={show} onHide={handleClose} animation={true} className='mt-5'>
+      <Modal.Header closeButton className='px-4'>
+        <Modal.Title>Category details</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="container d-flex flex-column mb-3">
+
+          <div className="Category-data">
+            <div className="form-inputs input-group">
+              <input
+                disabled
+                type="text"
+                className="form-control py-3"
+                placeholder={selectedCategory?.name}
+                aria-label="Name"
+                aria-describedby="basic-addon1"
+              />
+            </div>
+
+          </div>
+        </div>
+      </Modal.Body>
+    </Modal>
 
 
     {/* hidden buttons for modals */}

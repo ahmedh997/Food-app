@@ -246,8 +246,8 @@ export default function RecipesList() {
 
 
     <Modal show={show} onHide={handleClose} animation={true} className='mt-3'>
-      <Modal.Header closeButton>
-        <Modal.Title className='p-2'>Recipe details</Modal.Title>
+      <Modal.Header closeButton className='px-4'>
+        <Modal.Title>Recipe details</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="container d-flex flex-column">

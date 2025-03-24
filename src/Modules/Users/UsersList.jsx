@@ -11,6 +11,8 @@ import noDataImg from '../../assets/images/blank-user-img.webp';
 import Pagination from '../Shared/Pagination/Pagination';
 import Filtration from '../Shared/Filteration/Filtration';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
+
 
 
 export default function UsersList() {
@@ -18,8 +20,16 @@ export default function UsersList() {
   const [loginData, setLoginData] = useState(null);
   const [usersList, setUsersList] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [arrayOfPages, setArrayOfPages] = useState([]);
+
+
+  // Modal functions 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const getUsersList = async (pageSize, pageNumber, name, email, country) => {
     try {
@@ -66,7 +76,7 @@ export default function UsersList() {
   useEffect(() => {
     getUsersList();
     const userData = JSON.parse(localStorage.getItem('userData'));
-    setLoginData(userData)
+    setLoginData(userData);
     if (userData?.userGroup === 'SystemUser') {
       navigate('/dashboard');
     }
@@ -110,7 +120,7 @@ export default function UsersList() {
               {usersList?.map((users) => <>
                 <tr key={users?.id} className='text-center'>
                   <td data-label="User Name">{users?.userName}</td>
-                  <td data-label="User Image" ><img style={{ width: 70, height: 70, objectFit: 'cover' }} loading='lazy' className='img-fluid rounded-circle' src={users?.imagePath ? `${IMAGE_URL}/${users?.imagePath}` : `${noDataImg}`} alt="Recipe Image" /></td>
+                  <td data-label="User Image" ><img style={{ width: 70, height: 70, objectFit: 'cover' }} loading='lazy' className='img-fluid rounded-circle' src={users?.imagePath ? `${IMAGE_URL}/${users?.imagePath}` : `${noDataImg}`} alt="User Image" /></td>
                   <td data-label="User Email">{users?.email}</td>
                   <td data-label="User Phone">{users?.phoneNumber}</td>
                   <td data-label="User Country">{users?.country}</td>
@@ -126,7 +136,7 @@ export default function UsersList() {
                       </button>
                       <ul className="dropdown-menu overflow-hidden border-0 rounded-5 shadow-lg w-100">
                         <li>
-                          <a role="button" className="dropdown-item d-flex align-items-center">
+                          <a role="button" className="dropdown-item d-flex align-items-center" onClick={() => { setSelectedUser(users); handleShow(); }}>
                             <FiEye aria-label='Eye' className="me-2 text-success" /> View
                           </a>
                         </li>
@@ -146,6 +156,39 @@ export default function UsersList() {
             </tbody>
           </table> : <NoData />}
     </div>
+
+
+    {/* Show user  */}
+
+
+    <Modal show={show} onHide={handleClose} animation={true} className='mt-3'>
+      <Modal.Header closeButton className='px-4'>
+        <Modal.Title >User Data</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="container d-flex flex-column">
+          <div className="user-image d-flex justify-content-center">
+            <img style={{ maxWidth: 250, height: 250, objectFit: 'cover' }} loading='lazy' className='img-fluid w-100 rounded-circle my-3' src={selectedUser?.imagePath ? `${IMAGE_URL}/${selectedUser?.imagePath}` : `${noDataImg}`} alt="Recipe Image" />
+          </div>
+          <div className="recipe-data">
+            <div className='mb-2 text-capitalize text-center p-3 border-bottom '>
+              <h2>{selectedUser?.userName}</h2>
+              <p className='text-white fw-light w-50 m-auto px-3 rounded-pill bg-success shadow-lg'>Role: <span className='fw-medium'>{`${selectedUser?.group?.name}`}</span> </p>
+            </div>
+            <div className='text d-flex justify-content-between text-left'>
+              <p><span className='fw-bold'>Email: </span> {selectedUser?.email}</p>
+              <p><span className='fw-bold'>Member Since: </span> {new Date(selectedUser?.creationDate).toLocaleDateString()}</p>
+            </div>
+            <div className='text d-flex justify-content-between text-left'>
+              <p><span className='fw-bold'>Phone Number: </span> {selectedUser?.phoneNumber}</p>
+              <p className=''><span className='fw-bold'>Country: </span>{selectedUser?.country}</p>
+            </div>
+          </div>
+
+        </div>
+      </Modal.Body>
+    </Modal>
+
 
 
     <button
