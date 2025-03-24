@@ -53,7 +53,7 @@ export default function Navbar({ loginData }) {
 
               <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li>
-                  <a className="dropdown-item" onClick={() => handleShow()}>
+                  <a role='button' className="dropdown-item" onClick={() => handleShow()}>
                     Profile
                   </a>
                 </li>

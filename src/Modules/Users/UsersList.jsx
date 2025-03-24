@@ -175,11 +175,9 @@ export default function UsersList() {
               <h2>{selectedUser?.userName}</h2>
               <p className='text-white fw-light w-50 m-auto px-3 rounded-pill bg-success shadow-lg'>Role: <span className='fw-medium'>{`${selectedUser?.group?.name}`}</span> </p>
             </div>
-            <div className='text d-flex justify-content-between text-left'>
+            <div className='text d-flex flex-column text-center'>
               <p><span className='fw-bold'>Email: </span> {selectedUser?.email}</p>
               <p><span className='fw-bold'>Member Since: </span> {new Date(selectedUser?.creationDate).toLocaleDateString()}</p>
-            </div>
-            <div className='text d-flex justify-content-between text-left'>
               <p><span className='fw-bold'>Phone Number: </span> {selectedUser?.phoneNumber}</p>
               <p className=''><span className='fw-bold'>Country: </span>{selectedUser?.country}</p>
             </div>
