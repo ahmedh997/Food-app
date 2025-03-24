@@ -85,7 +85,7 @@ export default function Navbar({ loginData }) {
               <h2>{loginData?.userName}</h2>
               <p className='text-white fw-light w-50 m-auto px-3 rounded-pill bg-success shadow-lg'>Role: <span className='fw-medium'>{`${loginData?.userGroup}`}</span> </p>
             </div>
-            <div className='text d-flex justify-content-between text-left'>
+            <div className='text d-flex justify-content-center text-center'>
               <p><span className='fw-bold'>Email: </span> {loginData?.userEmail}</p>
               
             </div>
